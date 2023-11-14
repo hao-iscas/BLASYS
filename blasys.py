@@ -108,11 +108,17 @@ if __name__ == '__main__':
             while cmd:
                 print('[' + str(count) + '] Run BLASYS command: '  + cmd )
                 blasys.onecmd(cmd)
+<<<<<<< HEAD
                 # print("After opencmd")
+=======
+>>>>>>> origin/master
                 cmd = f.readline()
                 count += 1
 
     # Normal execution
     else:
+<<<<<<< HEAD
         # print("Hello main")
+=======
+>>>>>>> origin/master
         main()
