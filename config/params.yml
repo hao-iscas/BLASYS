@@ -1,0 +1,16 @@
+
+# LSOracle for partitioning
+lsoracle: 'lsoracle'
+
+# Synthesis
+yosys: 'yosys'
+
+# Simulation
+iverilog: 'iverilog'
+vvp: 'vvp'
+
+# ABC for synthesis
+abc: 'abc'
+
+# OpenSTA for delay and power analysis
+OpenSTA: 'sta'

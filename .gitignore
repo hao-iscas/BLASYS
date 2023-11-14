@@ -1,0 +1,30 @@
+# Compiled Python file
+__pycache__/
+*$py.class
+
+# C extension
+*.so
+*.o
+
+# Liberty file
+*.lib
+
+# Partitioning file
+hypergraph.txt
+
+# Regression test resuls
+test/*_output
+
+# Regression testbench
+test/*_tb.v
+test/hypergraph.txt
+test/*_output
+test/*_script
+
+# Hao Hu: 2023-11-8 => scripts and results of circuits
+circuit_outputs/*
+scripts/*
+
+# Hao Hu: 2023-11-8 => some extensions
+*.history
+.python-version

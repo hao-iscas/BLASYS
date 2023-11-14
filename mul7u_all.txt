@@ -1,0 +1,2079 @@
+/----------------------------------------------------------------------------\
+|                                                                            |
+|  BLASYS -- Approximate Logic Synthesis Using Boolean Matrix Factorization  |
+|  Version: 0.5-beta                                                       |
+|                                                                            |
+|  Copyright (C) 2019  SCALE Lab, Brown University                           |
+|                                                                            |
+|  Permission to use, copy, modify, and/or distribute this software for any  |
+|  purpose with or without fee is hereby granted, provided that the above    |
+|  copyright notice and this permission notice appear in all copies.         |
+|                                                                            |
+|  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+|  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+|  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+|  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+|  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+|  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+|  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+|                                                                            |
+\----------------------------------------------------------------------------/
+[0] Run BLASYS command: output_to circuit_outputs/mul7u
+
+Set output directory to circuit_outputs/mul7u.
+
+[1] Run BLASYS command: read_verilog test/mul7u_01L.v
+
+Checking software dependency ...
+Module Name mul7u_01L, Inputs: 14, Outputs: 14
+Successfully loaded input file and created optimizer.
+
+Create output directory...
+
+
+[2] Run BLASYS command: read_testbench test/mul7u_01L_tb.v
+
+Successfully read testbench file.
+
+[3] Run BLASYS command: metric MAE
+
+Successfully set error metric as MAE
+
+[4] Run BLASYS command: parallel on -cpu 8
+
+Turn on parallel mode.
+Number of cores using: 8
+
+[5] Run BLASYS command: read_liberty config/ssxlib013.lib
+
+Successfully loaded liberty file config/ssxlib013.lib.
+
+[6] Run BLASYS command: sta on
+
+Turn on OpenSTA. Evaluate power and delay.
+
+[7] Run BLASYS command: partition 10
+
+Parsing input verilog into aig format ...
+read_verilog test/mul7u_01L.v; synth -flatten; opt; opt_clean -purge; abc -g NAND; aigmap; opt; opt_clean -purge; write_aiger -vmap circuit_outputs/mul7u/mul7u_01L.map circuit_outputs/mul7u/mul7u_01L.aig;
+--- In greedyWorker.recursive_partitioning() ---
+Partitioning input circuit...
+circuit_outputs/mul7u/partition/mul7u_01L_9.v, Inp: 8, Out: 7
+circuit_outputs/mul7u/partition/mul7u_01L_8.v, Inp: 11, Out: 7
+circuit_outputs/mul7u/partition/mul7u_01L_7.v, Inp: 7, Out: 4
+circuit_outputs/mul7u/partition/mul7u_01L_6.v, Inp: 7, Out: 4
+circuit_outputs/mul7u/partition/mul7u_01L_5.v, Inp: 7, Out: 9
+circuit_outputs/mul7u/partition/mul7u_01L_4.v, Inp: 9, Out: 10
+circuit_outputs/mul7u/partition/mul7u_01L_3.v, Inp: 8, Out: 14
+circuit_outputs/mul7u/partition/mul7u_01L_2.v, Inp: 8, Out: 5
+circuit_outputs/mul7u/partition/mul7u_01L_1.v, Inp: 11, Out: 8
+circuit_outputs/mul7u/partition/mul7u_01L_0.v, Inp: 6, Out: 3
+Number of partitions 10
+Create testbench for partition 0
+Generate truth table for partition 0
+Create testbench for partition 1
+Generate truth table for partition 1
+Create testbench for partition 2
+Generate truth table for partition 2
+Create testbench for partition 3
+Generate truth table for partition 3
+Create testbench for partition 4
+Generate truth table for partition 4
+Create testbench for partition 5
+Generate truth table for partition 5
+Create testbench for partition 6
+Generate truth table for partition 6
+Create testbench for partition 7
+Generate truth table for partition 7
+Create testbench for partition 8
+Generate truth table for partition 8
+Create testbench for partition 9
+Generate truth table for partition 9
+
+
+[8] Run BLASYS command: blasys -ts 0.01,0.02 -tr 3
+CMD: In do_blasys
+Simulating truth table on input design...
+Synthesizing input design with original partitions...
+Original design area  1451.0
+----- In utils/greedyWorker.greedy_opt() -----
+==================== Starting Approximation by Greedy Search  ====================
+Log: Current stream of factorization degree:  [7, 7, 4, 4, 9, 10, 14, 5, 8, 3]
+--------------- Iteration 0 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 2 to degree 3 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.027986	Circuit area: 1426.000000	Circuit delay: 2436.993281	Power consumption: 851.364399
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 3 to degree 3 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.004135	Circuit area: 1476.000000	Circuit delay: 2754.915889	Power consumption: 754.126930
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 7 to degree 4 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.003571	Circuit area: 1510.000000	Circuit delay: 3062.617793	Power consumption: 802.251277
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 4 to degree 8 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.020112	Circuit area: 1646.000000	Circuit delay: 2694.994258	Power consumption: 823.127513
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 5 to degree 9 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.002631	Circuit area: 1510.000000	Circuit delay: 2779.458125	Power consumption: 834.570732
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 1 to degree 6 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 9 to degree 2 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.030044	Circuit area: 1465.000000	Circuit delay: 2756.349971	Power consumption: 753.172848
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 6 to degree 13 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.000753	Circuit area: 1461.000000	Circuit delay: 2735.033320	Power consumption: 761.748874
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 0 to degree 6 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 8 to degree 7 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.011480	Circuit area: 2826.000000	Circuit delay: 2996.731562	Power consumption: 1038.244925
+--------------- Finishing Iteration 0---------------
+Res: Partition [3] being approximated
+Res: Approximated error: 0.413538%	Area percentage: 101.722950%	Time used: 3.439826 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 3, 9, 10, 14, 5, 8, 3]
+[7, 7, 4, 4, 9, 10, 13, 5, 8, 3]
+[7, 7, 4, 4, 9, 10, 14, 4, 8, 3]
+--------------- Iteration 1 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 3 to degree 2 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.004044	Circuit area: 1348.000000	Circuit delay: 2437.452266	Power consumption: 641.542312
+Log: In utils.evaluate_design()
+Simulation error: 0.022302	Circuit area: 1630.000000	Circuit delay: 2770.820186	Power consumption: 872.157805
+Log: In utils.evaluate_design()
+Simulation error: 0.005615	Circuit area: 1508.000000	Circuit delay: 2753.902949	Power consumption: 816.343643
+Log: In utils.evaluate_design()
+Simulation error: 0.022441	Circuit area: 1447.000000	Circuit delay: 2634.471309	Power consumption: 804.659445
+Log: In utils.evaluate_design()
+Simulation error: 0.004157	Circuit area: 1536.000000	Circuit delay: 2836.431270	Power consumption: 784.671982
+Log: In utils.evaluate_design()
+Simulation error: 0.006407	Circuit area: 1531.000000	Circuit delay: 3058.672236	Power consumption: 743.247569
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.031233	Circuit area: 1468.000000	Circuit delay: 2523.859736	Power consumption: 738.315517
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.012380	Circuit area: 2865.000000	Circuit delay: 3062.631709	Power consumption: 1053.622575
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Simulation error: 0.028082	Circuit area: 1463.000000	Circuit delay: 2602.751582	Power consumption: 868.827628
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.020220	Circuit area: 1688.000000	Circuit delay: 2885.420527	Power consumption: 790.205377
+Log: In utils.evaluate_design()
+Simulation error: 0.002600	Circuit area: 1482.000000	Circuit delay: 2772.960566	Power consumption: 816.516287
+Log: In utils.evaluate_design()
+Simulation error: 0.003610	Circuit area: 1557.000000	Circuit delay: 3538.079219	Power consumption: 795.530272
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.029940	Circuit area: 1486.000000	Circuit delay: 2673.724482	Power consumption: 775.036518
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 6 to degree 12 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.000753	Circuit area: 1461.000000	Circuit delay: 2735.033320	Power consumption: 761.748874
+Log: In utils.evaluate_design()
+Simulation error: 0.011459	Circuit area: 2889.000000	Circuit delay: 3325.525264	Power consumption: 1050.882973
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.030137	Circuit area: 1477.000000	Circuit delay: 3285.398311	Power consumption: 872.425502
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 7 to degree 3 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.006860	Circuit area: 1407.000000	Circuit delay: 2731.857295	Power consumption: 790.523656
+Log: In utils.evaluate_design()
+Simulation error: 0.028937	Circuit area: 1515.000000	Circuit delay: 3169.099238	Power consumption: 780.380331
+Log: In utils.evaluate_design()
+Simulation error: 0.021518	Circuit area: 1731.000000	Circuit delay: 3398.897578	Power consumption: 928.829017
+Log: In utils.evaluate_design()
+Simulation error: 0.003607	Circuit area: 1551.000000	Circuit delay: 3351.823359	Power consumption: 837.851432
+Log: In utils.evaluate_design()
+Simulation error: 0.010595	Circuit area: 2781.000000	Circuit delay: 3882.497676	Power consumption: 1002.728590
+--------------- Finishing Iteration 1---------------
+Res: Partition [3] being approximated
+Res: Approximated error: 0.404383%	Area percentage: 92.901447%	Time used: 8.059819 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 2, 9, 10, 14, 5, 8, 3]
+[7, 7, 4, 4, 9, 10, 14, 3, 8, 3]
+[7, 7, 4, 3, 9, 9, 14, 5, 8, 3]
+--------------- Iteration 2 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 3 to degree 1 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.004013	Circuit area: 1281.000000	Circuit delay: 2482.572139	Power consumption: 559.533597
+Log: In utils.evaluate_design()
+Simulation error: 0.022222	Circuit area: 1339.000000	Circuit delay: 2435.470576	Power consumption: 707.850733
+Log: In utils.evaluate_design()
+Simulation error: 0.022218	Circuit area: 1595.000000	Circuit delay: 2952.779902	Power consumption: 814.262545
+Log: In utils.evaluate_design()
+Simulation error: 0.005096	Circuit area: 1392.000000	Circuit delay: 2596.865352	Power consumption: 720.890879
+Log: In utils.evaluate_design()
+Simulation error: 0.004119	Circuit area: 1399.000000	Circuit delay: 2422.973506	Power consumption: 668.398046
+Log: In utils.evaluate_design()
+Simulation error: 0.005742	Circuit area: 1389.000000	Circuit delay: 3202.887568	Power consumption: 725.610938
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.031281	Circuit area: 1353.000000	Circuit delay: 2547.414668	Power consumption: 680.583122
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.011449	Circuit area: 1773.000000	Circuit delay: 2577.170039	Power consumption: 686.455867
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Simulation error: 0.033314	Circuit area: 1371.000000	Circuit delay: 2862.929316	Power consumption: 868.411094
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 7 to degree 2 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.007458	Circuit area: 1366.000000	Circuit delay: 2643.521602	Power consumption: 768.560159
+Log: In utils.evaluate_design()
+Simulation error: 0.009735	Circuit area: 1442.000000	Circuit delay: 2658.740596	Power consumption: 790.551421
+Log: In utils.evaluate_design()
+Simulation error: 0.023636	Circuit area: 1622.000000	Circuit delay: 3066.007930	Power consumption: 933.958625
+Log: In utils.evaluate_design()
+Simulation error: 0.006852	Circuit area: 1451.000000	Circuit delay: 2926.978145	Power consumption: 825.223338
+Log: In utils.evaluate_design()
+Simulation error: 0.005295	Circuit area: 1460.000000	Circuit delay: 2656.791865	Power consumption: 776.866102
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.027299	Circuit area: 1414.000000	Circuit delay: 2613.261836	Power consumption: 815.474254
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.011168	Circuit area: 1803.000000	Circuit delay: 2986.761592	Power consumption: 666.789187
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.023429	Circuit area: 1509.000000	Circuit delay: 2725.358760	Power consumption: 829.445082
+Log: In utils.evaluate_design()
+Simulation error: 0.023250	Circuit area: 1738.000000	Circuit delay: 2922.438105	Power consumption: 929.088332
+Log: In utils.evaluate_design()
+Simulation error: 0.005642	Circuit area: 1532.000000	Circuit delay: 3187.023555	Power consumption: 796.228764
+Log: In utils.evaluate_design()
+Simulation error: 0.006096	Circuit area: 1584.000000	Circuit delay: 3192.882197	Power consumption: 821.931870
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 5 to degree 8 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.005236	Circuit area: 1473.000000	Circuit delay: 2764.089717	Power consumption: 741.761003
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.030737	Circuit area: 1509.000000	Circuit delay: 2489.678340	Power consumption: 837.319705
+Log: In utils.evaluate_design()
+Simulation error: 0.011780	Circuit area: 2563.000000	Circuit delay: 3256.181025	Power consumption: 962.697726
+--------------- Finishing Iteration 2---------------
+Res: Partition [3] being approximated
+Res: Approximated error: 0.401331%	Area percentage: 88.283942%	Time used: 8.042604 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 10, 14, 5, 8, 3]
+[7, 7, 4, 2, 9, 10, 13, 5, 8, 3]
+[7, 7, 4, 2, 9, 9, 14, 5, 8, 3]
+--------------- Iteration 3 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.021943	Circuit area: 1288.000000	Circuit delay: 2371.212031	Power consumption: 562.532747
+Log: In utils.evaluate_design()
+Simulation error: 0.022493	Circuit area: 1545.000000	Circuit delay: 2703.228145	Power consumption: 732.165296
+Log: In utils.evaluate_design()
+Simulation error: 0.004415	Circuit area: 1336.000000	Circuit delay: 2486.234736	Power consumption: 580.242369
+Log: In utils.evaluate_design()
+Simulation error: 0.005757	Circuit area: 1303.000000	Circuit delay: 3033.020625	Power consumption: 652.823714
+Log: In utils.evaluate_design()
+Simulation error: 0.005223	Circuit area: 1322.000000	Circuit delay: 2519.207393	Power consumption: 641.898718
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.031310	Circuit area: 1297.000000	Circuit delay: 2441.543086	Power consumption: 572.336314
+Log: In utils.evaluate_design()
+Simulation error: 0.011151	Circuit area: 1718.000000	Circuit delay: 2356.828242	Power consumption: 635.275792
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.004119	Circuit area: 1399.000000	Circuit delay: 2422.973506	Power consumption: 668.398046
+Log: In utils.evaluate_design()
+Simulation error: 0.021845	Circuit area: 1396.000000	Circuit delay: 2499.169551	Power consumption: 723.149918
+Log: In utils.evaluate_design()
+Simulation error: 0.022346	Circuit area: 1612.000000	Circuit delay: 2750.288203	Power consumption: 807.394797
+Log: In utils.evaluate_design()
+Simulation error: 0.005142	Circuit area: 1374.000000	Circuit delay: 2856.148555	Power consumption: 706.760737
+Log: In utils.evaluate_design()
+Simulation error: 0.005780	Circuit area: 1474.000000	Circuit delay: 3327.950557	Power consumption: 772.009080
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.031398	Circuit area: 1429.000000	Circuit delay: 2578.089229	Power consumption: 723.834266
+Log: In utils.evaluate_design()
+Simulation error: 0.011454	Circuit area: 1866.000000	Circuit delay: 2929.922969	Power consumption: 762.095326
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.004983	Circuit area: 1351.000000	Circuit delay: 2483.691035	Power consumption: 671.205285
+Log: In utils.evaluate_design()
+Simulation error: 0.031698	Circuit area: 1400.000000	Circuit delay: 2696.492305	Power consumption: 741.411874
+Log: In utils.evaluate_design()
+Simulation error: 0.023152	Circuit area: 1614.000000	Circuit delay: 3105.743770	Power consumption: 850.960554
+Log: In utils.evaluate_design()
+Simulation error: 0.023167	Circuit area: 1375.000000	Circuit delay: 2703.253291	Power consumption: 832.979567
+Log: In utils.evaluate_design()
+Simulation error: 0.005588	Circuit area: 1455.000000	Circuit delay: 3051.458613	Power consumption: 734.450237
+Log: In utils.evaluate_design()
+Simulation error: 0.011683	Circuit area: 1638.000000	Circuit delay: 2659.502314	Power consumption: 622.282852
+--------------- Finishing Iteration 3---------------
+Res: Partition [3 6] being approximated
+Res: Approximated error: 0.441542%	Area percentage: 92.074431%	Time used: 6.560447 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 10, 13, 5, 8, 3]
+[7, 7, 4, 1, 9, 10, 14, 4, 8, 3]
+[7, 7, 4, 1, 9, 9, 14, 5, 8, 3]
+--------------- Iteration 4 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.004415	Circuit area: 1336.000000	Circuit delay: 2486.234736	Power consumption: 580.242369
+Log: In utils.evaluate_design()
+Simulation error: 0.022674	Circuit area: 1606.000000	Circuit delay: 2711.774531	Power consumption: 758.945011
+Log: In utils.evaluate_design()
+Simulation error: 0.005694	Circuit area: 1312.000000	Circuit delay: 2806.271357	Power consumption: 545.190007
+Log: In utils.evaluate_design()
+Simulation error: 0.021575	Circuit area: 1353.000000	Circuit delay: 2396.489619	Power consumption: 632.546318
+Log: In utils.evaluate_design()
+Simulation error: 0.005839	Circuit area: 1367.000000	Circuit delay: 3236.466670	Power consumption: 666.319102
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.031284	Circuit area: 1353.000000	Circuit delay: 2432.484004	Power consumption: 604.643836
+Log: In utils.evaluate_design()
+Simulation error: 0.011219	Circuit area: 1753.000000	Circuit delay: 2767.874873	Power consumption: 649.202382
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.008340	Circuit area: 1246.000000	Circuit delay: 2691.821650	Power consumption: 630.467606
+Log: In utils.evaluate_design()
+Simulation error: 0.023710	Circuit area: 1317.000000	Circuit delay: 3150.937129	Power consumption: 675.916788
+Log: In utils.evaluate_design()
+Simulation error: 0.024025	Circuit area: 1568.000000	Circuit delay: 3121.618037	Power consumption: 812.733604
+Log: In utils.evaluate_design()
+Simulation error: 0.005457	Circuit area: 1290.000000	Circuit delay: 2777.366084	Power consumption: 631.013478
+Log: In utils.evaluate_design()
+Simulation error: 0.030655	Circuit area: 1301.000000	Circuit delay: 2912.671016	Power consumption: 701.771176
+Log: In utils.evaluate_design()
+Simulation error: 0.011092	Circuit area: 1652.000000	Circuit delay: 3302.684199	Power consumption: 566.882547
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.005216	Circuit area: 1254.000000	Circuit delay: 2536.993525	Power consumption: 541.085727
+Log: In utils.evaluate_design()
+Simulation error: 0.022762	Circuit area: 1308.000000	Circuit delay: 2519.108760	Power consumption: 699.639146
+Log: In utils.evaluate_design()
+Simulation error: 0.023443	Circuit area: 1568.000000	Circuit delay: 2737.606562	Power consumption: 788.503210
+Log: In utils.evaluate_design()
+Simulation error: 0.031995	Circuit area: 1337.000000	Circuit delay: 2549.129512	Power consumption: 664.455583
+Log: In utils.evaluate_design()
+Simulation error: 0.011605	Circuit area: 1569.000000	Circuit delay: 2680.926143	Power consumption: 598.559272
+--------------- Finishing Iteration 4---------------
+Res: Partition [3 5] being approximated
+Res: Approximated error: 0.521572%	Area percentage: 86.423156%	Time used: 6.488183 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 8, 14, 5, 8, 3]
+[7, 7, 4, 1, 9, 9, 14, 4, 8, 3]
+[7, 7, 4, 1, 9, 10, 12, 5, 8, 3]
+--------------- Iteration 5 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.023242	Circuit area: 1511.000000	Circuit delay: 2680.413203	Power consumption: 722.045137
+Log: In utils.evaluate_design()
+Simulation error: 0.005615	Circuit area: 1242.000000	Circuit delay: 2696.160518	Power consumption: 514.037150
+Log: In utils.evaluate_design()
+Simulation error: 0.022463	Circuit area: 1239.000000	Circuit delay: 2356.671016	Power consumption: 633.103249
+Log: In utils.evaluate_design()
+Simulation error: 0.005457	Circuit area: 1290.000000	Circuit delay: 2777.366084	Power consumption: 631.013478
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 5 to degree 7 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.005254	Circuit area: 1223.000000	Circuit delay: 2360.604854	Power consumption: 517.298409
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.032163	Circuit area: 1274.000000	Circuit delay: 2457.022090	Power consumption: 559.637439
+Log: In utils.evaluate_design()
+Simulation error: 0.011585	Circuit area: 1464.000000	Circuit delay: 2304.798457	Power consumption: 533.837243
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.007206	Circuit area: 1240.000000	Circuit delay: 2615.962520	Power consumption: 604.835106
+Log: In utils.evaluate_design()
+Simulation error: 0.023064	Circuit area: 1284.000000	Circuit delay: 2805.536006	Power consumption: 716.201612
+Log: In utils.evaluate_design()
+Simulation error: 0.023565	Circuit area: 1539.000000	Circuit delay: 2905.177607	Power consumption: 811.866776
+Log: In utils.evaluate_design()
+Simulation error: 0.030717	Circuit area: 1308.000000	Circuit delay: 2761.774531	Power consumption: 617.094105
+Log: In utils.evaluate_design()
+Simulation error: 0.011587	Circuit area: 1577.000000	Circuit delay: 2703.923213	Power consumption: 608.405098
+Log: In utils.evaluate_design()
+Simulation error: 0.005891	Circuit area: 1316.000000	Circuit delay: 3108.772334	Power consumption: 615.929312
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.021575	Circuit area: 1353.000000	Circuit delay: 2396.489619	Power consumption: 632.546318
+Log: In utils.evaluate_design()
+Simulation error: 0.005694	Circuit area: 1312.000000	Circuit delay: 2806.271357	Power consumption: 545.190007
+Log: In utils.evaluate_design()
+Simulation error: 0.022674	Circuit area: 1606.000000	Circuit delay: 2711.774531	Power consumption: 758.945011
+Log: In utils.evaluate_design()
+Simulation error: 0.005839	Circuit area: 1367.000000	Circuit delay: 3236.466670	Power consumption: 666.319102
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.031284	Circuit area: 1353.000000	Circuit delay: 2432.484004	Power consumption: 604.643836
+Log: In utils.evaluate_design()
+Simulation error: 0.011219	Circuit area: 1753.000000	Circuit delay: 2767.874873	Power consumption: 649.202382
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 6 to degree 11 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.004400	Circuit area: 1295.000000	Circuit delay: 2648.272090	Power consumption: 531.967147
+--------------- Finishing Iteration 5---------------
+Res: Partition [3 5] being approximated
+Res: Approximated error: 0.525411%	Area percentage: 84.286699%	Time used: 6.798149 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 7, 14, 5, 8, 3]
+[7, 7, 4, 1, 9, 8, 13, 5, 8, 3]
+[7, 7, 4, 1, 9, 10, 11, 5, 8, 3]
+--------------- Iteration 6 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.022071	Circuit area: 1220.000000	Circuit delay: 2380.900264	Power consumption: 613.556302
+Log: In utils.evaluate_design()
+Simulation error: 0.023036	Circuit area: 1483.000000	Circuit delay: 2717.331416	Power consumption: 675.798452
+Log: In utils.evaluate_design()
+Simulation error: 0.005626	Circuit area: 1185.000000	Circuit delay: 2663.583613	Power consumption: 459.921575
+Log: In utils.evaluate_design()
+Simulation error: 0.005600	Circuit area: 1269.000000	Circuit delay: 2887.696162	Power consumption: 627.454778
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 5 to degree 6 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.005371	Circuit area: 1193.000000	Circuit delay: 2463.787959	Power consumption: 513.739360
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.032230	Circuit area: 1243.000000	Circuit delay: 2400.366328	Power consumption: 551.611767
+Log: In utils.evaluate_design()
+Simulation error: 0.011667	Circuit area: 1465.000000	Circuit delay: 2408.185664	Power consumption: 571.156328
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.005615	Circuit area: 1242.000000	Circuit delay: 2696.160518	Power consumption: 514.037150
+Log: In utils.evaluate_design()
+Simulation error: 0.031856	Circuit area: 1252.000000	Circuit delay: 2506.154902	Power consumption: 550.151570
+Log: In utils.evaluate_design()
+Simulation error: 0.023462	Circuit area: 1485.000000	Circuit delay: 2721.919551	Power consumption: 655.774900
+Log: In utils.evaluate_design()
+Simulation error: 0.022071	Circuit area: 1222.000000	Circuit delay: 2613.351680	Power consumption: 589.357631
+Log: In utils.evaluate_design()
+Simulation error: 0.005891	Circuit area: 1316.000000	Circuit delay: 3108.772334	Power consumption: 615.929312
+Log: In utils.evaluate_design()
+Simulation error: 0.011707	Circuit area: 1434.000000	Circuit delay: 2692.989619	Power consumption: 500.409456
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.005646	Circuit area: 1198.000000	Circuit delay: 2450.091426	Power consumption: 520.231202
+Log: In utils.evaluate_design()
+Simulation error: 0.021353	Circuit area: 1300.000000	Circuit delay: 2588.946650	Power consumption: 600.801781
+Log: In utils.evaluate_design()
+Simulation error: 0.022566	Circuit area: 1512.000000	Circuit delay: 2793.640010	Power consumption: 706.268067
+Log: In utils.evaluate_design()
+Simulation error: 0.005511	Circuit area: 1329.000000	Circuit delay: 2973.283564	Power consumption: 600.291183
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.031328	Circuit area: 1318.000000	Circuit delay: 2432.315303	Power consumption: 569.115335
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 6 to degree 10 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.004421	Circuit area: 1252.000000	Circuit delay: 2576.463008	Power consumption: 533.129496
+Log: In utils.evaluate_design()
+Simulation error: 0.011061	Circuit area: 1758.000000	Circuit delay: 2618.153193	Power consumption: 590.320677
+--------------- Finishing Iteration 6---------------
+Res: Partition [3 5] being approximated
+Res: Approximated error: 0.537071%	Area percentage: 82.219159%	Time used: 6.325997 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 6, 14, 5, 8, 3]
+[7, 7, 4, 1, 9, 7, 13, 5, 8, 3]
+[7, 7, 4, 1, 9, 10, 10, 5, 8, 3]
+--------------- Iteration 7 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.005602	Circuit area: 1122.000000	Circuit delay: 2543.985225	Power consumption: 455.200003
+Log: In utils.evaluate_design()
+Simulation error: 0.023080	Circuit area: 1453.000000	Circuit delay: 2608.706416	Power consumption: 654.473202
+Log: In utils.evaluate_design()
+Simulation error: 0.022159	Circuit area: 1181.000000	Circuit delay: 2269.179316	Power consumption: 568.870397
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 5 to degree 5 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.005305	Circuit area: 1191.000000	Circuit delay: 2399.048213	Power consumption: 526.244927
+Log: In utils.evaluate_design()
+Simulation error: 0.005799	Circuit area: 1229.000000	Circuit delay: 2834.443477	Power consumption: 644.541404
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.032290	Circuit area: 1199.000000	Circuit delay: 2430.069209	Power consumption: 514.349318
+Log: In utils.evaluate_design()
+Simulation error: 0.011777	Circuit area: 1418.000000	Circuit delay: 2368.192988	Power consumption: 542.037480
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.005626	Circuit area: 1185.000000	Circuit delay: 2663.583613	Power consumption: 459.921575
+Log: In utils.evaluate_design()
+Simulation error: 0.031898	Circuit area: 1174.000000	Circuit delay: 2525.880244	Power consumption: 470.439350
+Log: In utils.evaluate_design()
+Simulation error: 0.023277	Circuit area: 1434.000000	Circuit delay: 2656.041377	Power consumption: 566.048373
+Log: In utils.evaluate_design()
+Simulation error: 0.021726	Circuit area: 1183.000000	Circuit delay: 2479.981807	Power consumption: 553.797756
+Log: In utils.evaluate_design()
+Simulation error: 0.005749	Circuit area: 1284.000000	Circuit delay: 3292.716426	Power consumption: 599.025865
+Log: In utils.evaluate_design()
+Simulation error: 0.011685	Circuit area: 1516.000000	Circuit delay: 2675.030391	Power consumption: 546.482392
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.005754	Circuit area: 1152.000000	Circuit delay: 2372.649043	Power consumption: 503.171352
+Log: In utils.evaluate_design()
+Simulation error: 0.022577	Circuit area: 1518.000000	Circuit delay: 2679.066523	Power consumption: 691.282272
+Log: In utils.evaluate_design()
+Simulation error: 0.021382	Circuit area: 1268.000000	Circuit delay: 2495.212275	Power consumption: 578.339736
+Log: In utils.evaluate_design()
+Simulation error: 0.005561	Circuit area: 1290.000000	Circuit delay: 3060.932490	Power consumption: 607.934315
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 6 to degree 9 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.004665	Circuit area: 1231.000000	Circuit delay: 2627.868037	Power consumption: 494.659937
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.031307	Circuit area: 1269.000000	Circuit delay: 2434.769404	Power consumption: 569.725584
+Log: In utils.evaluate_design()
+Simulation error: 0.011069	Circuit area: 1682.000000	Circuit delay: 2801.103145	Power consumption: 587.775197
+--------------- Finishing Iteration 7---------------
+Res: Partition [3 5 6] being approximated
+Res: Approximated error: 0.560160%	Area percentage: 77.325982%	Time used: 6.262904 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 6, 13, 5, 8, 3]
+[7, 7, 4, 1, 9, 9, 10, 5, 8, 3]
+[7, 7, 4, 1, 9, 5, 14, 5, 8, 3]
+--------------- Iteration 8 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.005424	Circuit area: 1146.000000	Circuit delay: 2548.733516	Power consumption: 471.453386
+Log: In utils.evaluate_design()
+Simulation error: 0.005602	Circuit area: 1122.000000	Circuit delay: 2543.985225	Power consumption: 455.200003
+Log: In utils.evaluate_design()
+Simulation error: 0.023245	Circuit area: 1367.000000	Circuit delay: 2517.820430	Power consumption: 574.062637
+Log: In utils.evaluate_design()
+Simulation error: 0.021852	Circuit area: 1113.000000	Circuit delay: 2608.249873	Power consumption: 488.393882
+Log: In utils.evaluate_design()
+Simulation error: 0.006054	Circuit area: 1270.000000	Circuit delay: 3237.835322	Power consumption: 595.011108
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.032039	Circuit area: 1134.000000	Circuit delay: 2446.742061	Power consumption: 470.460422
+Log: In utils.evaluate_design()
+Simulation error: 0.011727	Circuit area: 1402.000000	Circuit delay: 2716.316523	Power consumption: 473.068474
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.006441	Circuit area: 1145.000000	Circuit delay: 2452.630977	Power consumption: 509.614416
+Log: In utils.evaluate_design()
+Simulation error: 0.005606	Circuit area: 1121.000000	Circuit delay: 2699.920283	Power consumption: 471.281033
+Log: In utils.evaluate_design()
+Simulation error: 0.022273	Circuit area: 1148.000000	Circuit delay: 2380.557490	Power consumption: 583.006768
+Log: In utils.evaluate_design()
+Simulation error: 0.023603	Circuit area: 1419.000000	Circuit delay: 2707.354121	Power consumption: 658.910314
+Log: In utils.evaluate_design()
+Simulation error: 0.005878	Circuit area: 1178.000000	Circuit delay: 2726.112178	Power consumption: 563.989801
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.031948	Circuit area: 1181.000000	Circuit delay: 2422.221309	Power consumption: 519.537018
+Log: In utils.evaluate_design()
+Simulation error: 0.011713	Circuit area: 1379.000000	Circuit delay: 2274.245967	Power consumption: 456.005888
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.022335	Circuit area: 1169.000000	Circuit delay: 2228.236689	Power consumption: 590.799958
+Log: In utils.evaluate_design()
+Simulation error: 0.032349	Circuit area: 1213.000000	Circuit delay: 2400.345820	Power consumption: 557.034335
+Log: In utils.evaluate_design()
+Simulation error: 0.023167	Circuit area: 1461.000000	Circuit delay: 2876.782344	Power consumption: 705.850602
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 5 to degree 4 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.005275	Circuit area: 1089.000000	Circuit delay: 2386.651240	Power consumption: 511.978345
+Log: In utils.evaluate_design()
+Simulation error: 0.005851	Circuit area: 1229.000000	Circuit delay: 2925.826045	Power consumption: 672.751630
+Log: In utils.evaluate_design()
+Simulation error: 0.011794	Circuit area: 1436.000000	Circuit delay: 2237.453486	Power consumption: 549.037301
+--------------- Finishing Iteration 8---------------
+Res: Partition [3 5] being approximated
+Res: Approximated error: 0.527533%	Area percentage: 75.051688%	Time used: 6.359544 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 4, 14, 5, 8, 3]
+[7, 7, 4, 1, 9, 8, 10, 5, 8, 3]
+[7, 7, 4, 1, 9, 6, 12, 5, 8, 3]
+--------------- Iteration 9 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.022043	Circuit area: 1088.000000	Circuit delay: 2305.340938	Power consumption: 539.191009
+Log: In utils.evaluate_design()
+Simulation error: 0.005387	Circuit area: 1114.000000	Circuit delay: 2351.562373	Power consumption: 487.514015
+Log: In utils.evaluate_design()
+Simulation error: 0.023077	Circuit area: 1368.000000	Circuit delay: 2831.714717	Power consumption: 653.556781
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 5 to degree 3 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.005284	Circuit area: 1061.000000	Circuit delay: 2477.029658	Power consumption: 495.520828
+Log: In utils.evaluate_design()
+Simulation error: 0.005632	Circuit area: 1141.000000	Circuit delay: 2572.702754	Power consumption: 622.456719
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.031949	Circuit area: 1118.000000	Circuit delay: 2503.862910	Power consumption: 526.105461
+Log: In utils.evaluate_design()
+Simulation error: 0.011662	Circuit area: 1332.000000	Circuit delay: 2225.841670	Power consumption: 513.271487
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.006236	Circuit area: 1100.000000	Circuit delay: 2460.067500	Power consumption: 475.437409
+Log: In utils.evaluate_design()
+Simulation error: 0.005672	Circuit area: 1064.000000	Circuit delay: 2309.078730	Power consumption: 430.048560
+Log: In utils.evaluate_design()
+Simulation error: 0.021869	Circuit area: 1122.000000	Circuit delay: 2490.711299	Power consumption: 545.939256
+Log: In utils.evaluate_design()
+Simulation error: 0.023360	Circuit area: 1379.000000	Circuit delay: 2818.122188	Power consumption: 626.875786
+Log: In utils.evaluate_design()
+Simulation error: 0.005878	Circuit area: 1178.000000	Circuit delay: 2726.112178	Power consumption: 563.989801
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.032061	Circuit area: 1144.000000	Circuit delay: 2548.755244	Power consumption: 505.947042
+Log: In utils.evaluate_design()
+Simulation error: 0.011687	Circuit area: 1341.000000	Circuit delay: 2533.969355	Power consumption: 491.913233
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.005626	Circuit area: 1051.000000	Circuit delay: 2439.728389	Power consumption: 422.432902
+Log: In utils.evaluate_design()
+Simulation error: 0.005424	Circuit area: 1146.000000	Circuit delay: 2548.733516	Power consumption: 471.453386
+Log: In utils.evaluate_design()
+Simulation error: 0.021852	Circuit area: 1113.000000	Circuit delay: 2608.249873	Power consumption: 488.393882
+Log: In utils.evaluate_design()
+Simulation error: 0.023245	Circuit area: 1367.000000	Circuit delay: 2517.820430	Power consumption: 574.062637
+Log: In utils.evaluate_design()
+Simulation error: 0.006054	Circuit area: 1270.000000	Circuit delay: 3237.835322	Power consumption: 595.011108
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.032039	Circuit area: 1134.000000	Circuit delay: 2446.742061	Power consumption: 470.460422
+Log: In utils.evaluate_design()
+Simulation error: 0.011727	Circuit area: 1402.000000	Circuit delay: 2716.316523	Power consumption: 473.068474
+--------------- Finishing Iteration 9---------------
+Res: Partition [3 5] being approximated
+Res: Approximated error: 0.528416%	Area percentage: 73.121985%	Time used: 6.207408 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 3, 14, 5, 8, 3]
+[7, 7, 4, 1, 9, 6, 11, 5, 8, 3]
+[7, 7, 4, 1, 9, 7, 10, 5, 8, 3]
+--------------- Iteration 10 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.005317	Circuit area: 1043.000000	Circuit delay: 2456.705439	Power consumption: 462.799799
+Log: In utils.evaluate_design()
+Simulation error: 0.021991	Circuit area: 1063.000000	Circuit delay: 2457.081660	Power consumption: 520.984351
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 5 to degree 2 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.005356	Circuit area: 1054.000000	Circuit delay: 2462.671260	Power consumption: 478.376547
+Log: In utils.evaluate_design()
+Simulation error: 0.022985	Circuit area: 1335.000000	Circuit delay: 2727.004268	Power consumption: 641.122984
+Log: In utils.evaluate_design()
+Simulation error: 0.005580	Circuit area: 1120.000000	Circuit delay: 2469.940547	Power consumption: 594.328856
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.031634	Circuit area: 1084.000000	Circuit delay: 2529.517939	Power consumption: 512.253202
+Log: In utils.evaluate_design()
+Simulation error: 0.011705	Circuit area: 1317.000000	Circuit delay: 2438.642451	Power consumption: 495.479442
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.005626	Circuit area: 1051.000000	Circuit delay: 2439.728389	Power consumption: 422.432902
+Log: In utils.evaluate_design()
+Simulation error: 0.021812	Circuit area: 1043.000000	Circuit delay: 2287.579707	Power consumption: 499.770977
+Log: In utils.evaluate_design()
+Simulation error: 0.023259	Circuit area: 1307.000000	Circuit delay: 2519.829707	Power consumption: 567.531271
+Log: In utils.evaluate_design()
+Simulation error: 0.005445	Circuit area: 1080.000000	Circuit delay: 2334.302852	Power consumption: 453.635846
+Log: In utils.evaluate_design()
+Simulation error: 0.006093	Circuit area: 1151.000000	Circuit delay: 2695.696406	Power consumption: 591.371150
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.032179	Circuit area: 1046.000000	Circuit delay: 2161.849482	Power consumption: 450.441556
+Log: In utils.evaluate_design()
+Simulation error: 0.011703	Circuit area: 1348.000000	Circuit delay: 2684.774775	Power consumption: 482.123345
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.006208	Circuit area: 1062.000000	Circuit delay: 2308.728145	Power consumption: 387.632230
+Log: In utils.evaluate_design()
+Simulation error: 0.021538	Circuit area: 1064.000000	Circuit delay: 2330.744502	Power consumption: 499.692105
+Log: In utils.evaluate_design()
+Simulation error: 0.031918	Circuit area: 1051.000000	Circuit delay: 2172.900508	Power consumption: 434.696558
+Log: In utils.evaluate_design()
+Simulation error: 0.023189	Circuit area: 1315.000000	Circuit delay: 2677.189814	Power consumption: 544.898910
+Log: In utils.evaluate_design()
+Simulation error: 0.005756	Circuit area: 1164.000000	Circuit delay: 2757.562617	Power consumption: 523.990195
+Log: In utils.evaluate_design()
+Simulation error: 0.011618	Circuit area: 1363.000000	Circuit delay: 2198.981562	Power consumption: 471.383275
+--------------- Finishing Iteration 10---------------
+Res: Partition [3 5 6] being approximated
+Res: Approximated error: 0.531688%	Area percentage: 71.881461%	Time used: 6.035500 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 3, 13, 5, 8, 3]
+[7, 7, 4, 1, 9, 2, 14, 5, 8, 3]
+[7, 7, 4, 1, 9, 6, 10, 5, 8, 3]
+--------------- Iteration 11 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.005317	Circuit area: 1043.000000	Circuit delay: 2456.705439	Power consumption: 462.799799
+Log: In utils.evaluate_design()
+Simulation error: 0.021677	Circuit area: 1042.000000	Circuit delay: 2420.013057	Power consumption: 473.891996
+Log: In utils.evaluate_design()
+Simulation error: 0.005278	Circuit area: 1019.000000	Circuit delay: 2450.750605	Power consumption: 444.619596
+Log: In utils.evaluate_design()
+Simulation error: 0.023141	Circuit area: 1307.000000	Circuit delay: 2753.451533	Power consumption: 596.316007
+Log: In utils.evaluate_design()
+Simulation error: 0.005866	Circuit area: 1085.000000	Circuit delay: 2583.136836	Power consumption: 542.107329
+Log: In utils.evaluate_design()
+Simulation error: 0.011888	Circuit area: 1283.000000	Circuit delay: 2253.549678	Power consumption: 483.325450
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.031521	Circuit area: 1063.000000	Circuit delay: 2441.072383	Power consumption: 452.026346
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.021621	Circuit area: 1053.000000	Circuit delay: 2423.706416	Power consumption: 528.499193
+Log: In utils.evaluate_design()
+Simulation error: 0.031546	Circuit area: 1077.000000	Circuit delay: 2529.368525	Power consumption: 497.392204
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 5 to degree 1 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.005212	Circuit area: 1015.000000	Circuit delay: 2471.327510	Power consumption: 461.783959
+Log: In utils.evaluate_design()
+Simulation error: 0.022812	Circuit area: 1312.000000	Circuit delay: 2647.383906	Power consumption: 609.921000
+Log: In utils.evaluate_design()
+Simulation error: 0.005177	Circuit area: 1096.000000	Circuit delay: 2578.806025	Power consumption: 547.859527
+Log: In utils.evaluate_design()
+Simulation error: 0.011625	Circuit area: 1281.000000	Circuit delay: 2305.661006	Power consumption: 484.419637
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.005445	Circuit area: 1080.000000	Circuit delay: 2334.302852	Power consumption: 453.635846
+Log: In utils.evaluate_design()
+Simulation error: 0.006068	Circuit area: 1042.000000	Circuit delay: 2266.663936	Power consumption: 385.728286
+Log: In utils.evaluate_design()
+Simulation error: 0.021812	Circuit area: 1043.000000	Circuit delay: 2287.579707	Power consumption: 499.770977
+Log: In utils.evaluate_design()
+Simulation error: 0.023259	Circuit area: 1307.000000	Circuit delay: 2519.829707	Power consumption: 567.531271
+Log: In utils.evaluate_design()
+Simulation error: 0.006093	Circuit area: 1151.000000	Circuit delay: 2695.696406	Power consumption: 591.371150
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.032179	Circuit area: 1046.000000	Circuit delay: 2161.849482	Power consumption: 450.441556
+Log: In utils.evaluate_design()
+Simulation error: 0.011703	Circuit area: 1348.000000	Circuit delay: 2684.774775	Power consumption: 482.123345
+--------------- Finishing Iteration 11---------------
+Res: Partition [3 5] being approximated
+Res: Approximated error: 0.521191%	Area percentage: 69.951757%	Time used: 5.768971 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 14, 5, 8, 3]
+[7, 7, 4, 1, 9, 2, 13, 5, 8, 3]
+[7, 7, 4, 1, 9, 3, 12, 5, 8, 3]
+--------------- Iteration 12 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.021678	Circuit area: 1009.000000	Circuit delay: 2423.744990	Power consumption: 497.110013
+Log: In utils.evaluate_design()
+Simulation error: 0.005278	Circuit area: 1019.000000	Circuit delay: 2450.733271	Power consumption: 444.623001
+Log: In utils.evaluate_design()
+Simulation error: 0.022846	Circuit area: 1270.000000	Circuit delay: 2672.813594	Power consumption: 592.167897
+Log: In utils.evaluate_design()
+Simulation error: 0.031564	Circuit area: 1039.000000	Circuit delay: 2537.847041	Power consumption: 480.151328
+Log: In utils.evaluate_design()
+Simulation error: 0.005336	Circuit area: 1034.000000	Circuit delay: 2405.876826	Power consumption: 492.878782
+Log: In utils.evaluate_design()
+Simulation error: 0.011737	Circuit area: 1261.000000	Circuit delay: 2420.313838	Power consumption: 478.631147
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.005278	Circuit area: 1019.000000	Circuit delay: 2450.750605	Power consumption: 444.619596
+Log: In utils.evaluate_design()
+Simulation error: 0.021402	Circuit area: 1018.000000	Circuit delay: 2411.701777	Power consumption: 457.389397
+Log: In utils.evaluate_design()
+Simulation error: 0.031463	Circuit area: 1040.000000	Circuit delay: 2435.020625	Power consumption: 439.081254
+Log: In utils.evaluate_design()
+Simulation error: 0.022957	Circuit area: 1274.000000	Circuit delay: 2685.728633	Power consumption: 584.439898
+Log: In utils.evaluate_design()
+Simulation error: 0.005415	Circuit area: 1051.000000	Circuit delay: 2457.494990	Power consumption: 477.410795
+Log: In utils.evaluate_design()
+Simulation error: 0.011712	Circuit area: 1182.000000	Circuit delay: 2279.426875	Power consumption: 432.759931
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.005317	Circuit area: 1043.000000	Circuit delay: 2456.688105	Power consumption: 462.803117
+Log: In utils.evaluate_design()
+Simulation error: 0.023141	Circuit area: 1307.000000	Circuit delay: 2753.451533	Power consumption: 596.316007
+Log: In utils.evaluate_design()
+Simulation error: 0.021677	Circuit area: 1042.000000	Circuit delay: 2420.013057	Power consumption: 473.891996
+Log: In utils.evaluate_design()
+Simulation error: 0.031521	Circuit area: 1063.000000	Circuit delay: 2441.072383	Power consumption: 452.026346
+Log: In utils.evaluate_design()
+Simulation error: 0.011888	Circuit area: 1283.000000	Circuit delay: 2253.549678	Power consumption: 483.325450
+Log: In utils.evaluate_design()
+Simulation error: 0.005866	Circuit area: 1085.000000	Circuit delay: 2583.136836	Power consumption: 542.107329
+--------------- Finishing Iteration 12---------------
+Res: Partition [3 5 6] being approximated
+Res: Approximated error: 0.527799%	Area percentage: 70.227429%	Time used: 5.451256 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 13, 5, 8, 3]
+[7, 7, 4, 1, 9, 2, 12, 5, 8, 3]
+[7, 7, 4, 1, 9, 1, 14, 4, 8, 3]
+--------------- Iteration 13 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.021402	Circuit area: 1018.000000	Circuit delay: 2411.701777	Power consumption: 457.389397
+Log: In utils.evaluate_design()
+Simulation error: 0.031463	Circuit area: 1040.000000	Circuit delay: 2435.020625	Power consumption: 439.081254
+Log: In utils.evaluate_design()
+Simulation error: 0.005278	Circuit area: 1019.000000	Circuit delay: 2450.733271	Power consumption: 444.623001
+Log: In utils.evaluate_design()
+Simulation error: 0.022957	Circuit area: 1274.000000	Circuit delay: 2685.728633	Power consumption: 584.439898
+Log: In utils.evaluate_design()
+Simulation error: 0.005415	Circuit area: 1051.000000	Circuit delay: 2457.494990	Power consumption: 477.410795
+Log: In utils.evaluate_design()
+Simulation error: 0.011712	Circuit area: 1182.000000	Circuit delay: 2279.426875	Power consumption: 432.759931
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.031463	Circuit area: 1040.000000	Circuit delay: 2435.020625	Power consumption: 439.081254
+Log: In utils.evaluate_design()
+Simulation error: 0.005278	Circuit area: 1019.000000	Circuit delay: 2450.733271	Power consumption: 444.623060
+Log: In utils.evaluate_design()
+Simulation error: 0.022957	Circuit area: 1274.000000	Circuit delay: 2685.728633	Power consumption: 584.439898
+Log: In utils.evaluate_design()
+Simulation error: 0.021402	Circuit area: 1018.000000	Circuit delay: 2411.701777	Power consumption: 457.389397
+Log: In utils.evaluate_design()
+Simulation error: 0.005415	Circuit area: 1051.000000	Circuit delay: 2457.494990	Power consumption: 477.410795
+Log: In utils.evaluate_design()
+Simulation error: 0.011712	Circuit area: 1182.000000	Circuit delay: 2279.426875	Power consumption: 432.759931
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.006987	Circuit area: 995.000000	Circuit delay: 2349.161738	Power consumption: 522.068178
+Log: In utils.evaluate_design()
+Simulation error: 0.022699	Circuit area: 1039.000000	Circuit delay: 2420.691035	Power consumption: 527.505239
+Log: In utils.evaluate_design()
+Simulation error: 0.030535	Circuit area: 1052.000000	Circuit delay: 2410.782588	Power consumption: 458.362629
+Log: In utils.evaluate_design()
+Simulation error: 0.023505	Circuit area: 1303.000000	Circuit delay: 2736.911738	Power consumption: 628.774462
+Log: In utils.evaluate_design()
+Simulation error: 0.011730	Circuit area: 1296.000000	Circuit delay: 2372.551387	Power consumption: 472.057232
+--------------- Finishing Iteration 13---------------
+Res: Partition [3 5 6] being approximated
+Res: Approximated error: 0.527799%	Area percentage: 70.227429%	Time used: 5.786220 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 12, 5, 8, 3]
+[7, 7, 4, 1, 9, 2, 11, 5, 8, 3]
+[7, 7, 4, 1, 9, 1, 13, 4, 8, 3]
+--------------- Iteration 14 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.005278	Circuit area: 1019.000000	Circuit delay: 2450.733271	Power consumption: 444.623060
+Log: In utils.evaluate_design()
+Simulation error: 0.021402	Circuit area: 1018.000000	Circuit delay: 2411.701777	Power consumption: 457.389397
+Log: In utils.evaluate_design()
+Simulation error: 0.022957	Circuit area: 1274.000000	Circuit delay: 2685.728633	Power consumption: 584.439898
+Log: In utils.evaluate_design()
+Simulation error: 0.031463	Circuit area: 1040.000000	Circuit delay: 2435.020625	Power consumption: 439.081254
+Log: In utils.evaluate_design()
+Simulation error: 0.005415	Circuit area: 1051.000000	Circuit delay: 2457.494990	Power consumption: 477.410795
+Log: In utils.evaluate_design()
+Simulation error: 0.011712	Circuit area: 1182.000000	Circuit delay: 2279.426875	Power consumption: 432.759931
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.005278	Circuit area: 1019.000000	Circuit delay: 2450.733271	Power consumption: 444.623060
+Log: In utils.evaluate_design()
+Simulation error: 0.031463	Circuit area: 1040.000000	Circuit delay: 2435.020625	Power consumption: 439.081254
+Log: In utils.evaluate_design()
+Simulation error: 0.022957	Circuit area: 1274.000000	Circuit delay: 2685.728633	Power consumption: 584.439898
+Log: In utils.evaluate_design()
+Simulation error: 0.021402	Circuit area: 1018.000000	Circuit delay: 2411.701777	Power consumption: 457.389426
+Log: In utils.evaluate_design()
+Simulation error: 0.011712	Circuit area: 1182.000000	Circuit delay: 2279.426875	Power consumption: 432.759931
+Log: In utils.evaluate_design()
+Simulation error: 0.005415	Circuit area: 1051.000000	Circuit delay: 2457.494990	Power consumption: 477.410795
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.007121	Circuit area: 1024.000000	Circuit delay: 2353.543086	Power consumption: 515.482971
+Log: In utils.evaluate_design()
+Simulation error: 0.022384	Circuit area: 1048.000000	Circuit delay: 2470.451533	Power consumption: 489.992439
+Log: In utils.evaluate_design()
+Simulation error: 0.030600	Circuit area: 1069.000000	Circuit delay: 2445.353633	Power consumption: 442.943390
+Log: In utils.evaluate_design()
+Simulation error: 0.023525	Circuit area: 1269.000000	Circuit delay: 2608.340693	Power consumption: 652.832794
+Log: In utils.evaluate_design()
+Simulation error: 0.011744	Circuit area: 1311.000000	Circuit delay: 2358.162959	Power consumption: 436.915463
+--------------- Finishing Iteration 14---------------
+Res: Partition [3 5 6] being approximated
+Res: Approximated error: 0.527799%	Area percentage: 70.227429%	Time used: 5.868801 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 11, 5, 8, 3]
+[7, 7, 4, 1, 9, 2, 10, 5, 8, 3]
+[7, 7, 4, 1, 9, 1, 12, 4, 8, 3]
+--------------- Iteration 15 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.031463	Circuit area: 1040.000000	Circuit delay: 2435.020625	Power consumption: 439.081254
+Log: In utils.evaluate_design()
+Simulation error: 0.005278	Circuit area: 1019.000000	Circuit delay: 2450.733271	Power consumption: 444.623060
+Log: In utils.evaluate_design()
+Simulation error: 0.021402	Circuit area: 1018.000000	Circuit delay: 2411.701777	Power consumption: 457.389426
+Log: In utils.evaluate_design()
+Simulation error: 0.022957	Circuit area: 1274.000000	Circuit delay: 2685.728633	Power consumption: 584.439898
+Log: In utils.evaluate_design()
+Simulation error: 0.005415	Circuit area: 1051.000000	Circuit delay: 2457.494990	Power consumption: 477.410795
+Log: In utils.evaluate_design()
+Simulation error: 0.011712	Circuit area: 1182.000000	Circuit delay: 2279.426875	Power consumption: 432.759931
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.021402	Circuit area: 1028.000000	Circuit delay: 2411.701777	Power consumption: 459.033414
+Log: In utils.evaluate_design()
+Simulation error: 0.031463	Circuit area: 1040.000000	Circuit delay: 2435.020625	Power consumption: 439.081225
+Log: In utils.evaluate_design()
+Simulation error: 0.005718	Circuit area: 1005.000000	Circuit delay: 2450.891719	Power consumption: 433.317269
+Log: In utils.evaluate_design()
+Simulation error: 0.022957	Circuit area: 1274.000000	Circuit delay: 2685.728633	Power consumption: 584.439898
+Log: In utils.evaluate_design()
+Simulation error: 0.005415	Circuit area: 1051.000000	Circuit delay: 2457.494990	Power consumption: 477.410795
+Log: In utils.evaluate_design()
+Simulation error: 0.011712	Circuit area: 1182.000000	Circuit delay: 2279.426875	Power consumption: 432.759931
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.007121	Circuit area: 1024.000000	Circuit delay: 2353.543086	Power consumption: 515.482971
+Log: In utils.evaluate_design()
+Simulation error: 0.022384	Circuit area: 1048.000000	Circuit delay: 2470.451533	Power consumption: 489.992439
+Log: In utils.evaluate_design()
+Simulation error: 0.030600	Circuit area: 1069.000000	Circuit delay: 2445.353633	Power consumption: 442.943390
+Log: In utils.evaluate_design()
+Simulation error: 0.023525	Circuit area: 1269.000000	Circuit delay: 2608.340693	Power consumption: 652.832794
+Log: In utils.evaluate_design()
+Simulation error: 0.011744	Circuit area: 1311.000000	Circuit delay: 2358.162959	Power consumption: 436.915463
+--------------- Finishing Iteration 15---------------
+Res: Partition [3 5 6] being approximated
+Res: Approximated error: 0.527799%	Area percentage: 70.227429%	Time used: 5.754891 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 10, 5, 8, 3]
+[7, 7, 4, 1, 9, 2, 9, 5, 8, 3]
+[7, 7, 4, 1, 9, 1, 11, 4, 8, 3]
+--------------- Iteration 16 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.005718	Circuit area: 1005.000000	Circuit delay: 2450.891719	Power consumption: 433.317269
+Log: In utils.evaluate_design()
+Simulation error: 0.031463	Circuit area: 1040.000000	Circuit delay: 2435.020625	Power consumption: 439.081225
+Log: In utils.evaluate_design()
+Simulation error: 0.022957	Circuit area: 1274.000000	Circuit delay: 2685.728633	Power consumption: 584.439898
+Log: In utils.evaluate_design()
+Simulation error: 0.021402	Circuit area: 1028.000000	Circuit delay: 2411.701777	Power consumption: 459.033414
+Log: In utils.evaluate_design()
+Simulation error: 0.005415	Circuit area: 1051.000000	Circuit delay: 2457.494990	Power consumption: 477.410795
+Log: In utils.evaluate_design()
+Simulation error: 0.011712	Circuit area: 1182.000000	Circuit delay: 2279.426875	Power consumption: 432.759931
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.023478	Circuit area: 1229.000000	Circuit delay: 2752.890010	Power consumption: 561.793975
+Log: In utils.evaluate_design()
+Simulation error: 0.031368	Circuit area: 1028.000000	Circuit delay: 2527.118281	Power consumption: 454.137829
+Log: In utils.evaluate_design()
+Simulation error: 0.020466	Circuit area: 998.000000	Circuit delay: 2411.701777	Power consumption: 439.477066
+Log: In utils.evaluate_design()
+Simulation error: 0.005941	Circuit area: 1027.000000	Circuit delay: 2457.870234	Power consumption: 463.626202
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 6 to degree 8 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.006763	Circuit area: 1035.000000	Circuit delay: 2459.401973	Power consumption: 483.702373
+Log: In utils.evaluate_design()
+Simulation error: 0.011920	Circuit area: 1142.000000	Circuit delay: 2293.423457	Power consumption: 435.590046
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.007121	Circuit area: 1024.000000	Circuit delay: 2353.306758	Power consumption: 515.489955
+Log: In utils.evaluate_design()
+Simulation error: 0.022384	Circuit area: 1048.000000	Circuit delay: 2470.451533	Power consumption: 489.992439
+Log: In utils.evaluate_design()
+Simulation error: 0.023525	Circuit area: 1269.000000	Circuit delay: 2608.340693	Power consumption: 652.832794
+Log: In utils.evaluate_design()
+Simulation error: 0.030600	Circuit area: 1069.000000	Circuit delay: 2445.353633	Power consumption: 442.943361
+Log: In utils.evaluate_design()
+Simulation error: 0.011744	Circuit area: 1311.000000	Circuit delay: 2358.162959	Power consumption: 436.915463
+--------------- Finishing Iteration 16---------------
+Res: Partition [3 5 6] being approximated
+Res: Approximated error: 0.571757%	Area percentage: 69.262578%	Time used: 5.830053 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 9, 5, 8, 3]
+[7, 7, 4, 1, 9, 1, 10, 4, 8, 3]
+[7, 7, 4, 1, 9, 2, 9, 4, 8, 3]
+--------------- Iteration 17 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.006725	Circuit area: 977.000000	Circuit delay: 2477.724238	Power consumption: 428.692030
+Log: In utils.evaluate_design()
+Simulation error: 0.020466	Circuit area: 998.000000	Circuit delay: 2411.701777	Power consumption: 439.477066
+Log: In utils.evaluate_design()
+Simulation error: 0.023478	Circuit area: 1229.000000	Circuit delay: 2752.890010	Power consumption: 561.793975
+Log: In utils.evaluate_design()
+Simulation error: 0.031368	Circuit area: 1028.000000	Circuit delay: 2527.118281	Power consumption: 454.137829
+Log: In utils.evaluate_design()
+Simulation error: 0.005941	Circuit area: 1027.000000	Circuit delay: 2457.870234	Power consumption: 463.626202
+Log: In utils.evaluate_design()
+Simulation error: 0.011920	Circuit area: 1142.000000	Circuit delay: 2293.423457	Power consumption: 435.590046
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.007121	Circuit area: 1024.000000	Circuit delay: 2353.306758	Power consumption: 515.490014
+Log: In utils.evaluate_design()
+Simulation error: 0.022384	Circuit area: 1048.000000	Circuit delay: 2470.451533	Power consumption: 489.992439
+Log: In utils.evaluate_design()
+Simulation error: 0.030600	Circuit area: 1069.000000	Circuit delay: 2445.353633	Power consumption: 442.943390
+Log: In utils.evaluate_design()
+Simulation error: 0.023525	Circuit area: 1269.000000	Circuit delay: 2608.340693	Power consumption: 652.832794
+Log: In utils.evaluate_design()
+Simulation error: 0.011744	Circuit area: 1311.000000	Circuit delay: 2358.162959	Power consumption: 436.915463
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.007691	Circuit area: 1011.000000	Circuit delay: 2351.293818	Power consumption: 501.028844
+Log: In utils.evaluate_design()
+Simulation error: 0.030602	Circuit area: 1043.000000	Circuit delay: 2369.207881	Power consumption: 445.148151
+Log: In utils.evaluate_design()
+Simulation error: 0.021478	Circuit area: 1017.000000	Circuit delay: 2409.163203	Power consumption: 469.662016
+Log: In utils.evaluate_design()
+Simulation error: 0.007503	Circuit area: 1074.000000	Circuit delay: 2554.223018	Power consumption: 535.394181
+Log: In utils.evaluate_design()
+Simulation error: 0.024131	Circuit area: 1294.000000	Circuit delay: 2626.387812	Power consumption: 608.164642
+Log: In utils.evaluate_design()
+Simulation error: 0.011948	Circuit area: 1346.000000	Circuit delay: 2479.096309	Power consumption: 451.052969
+--------------- Finishing Iteration 17---------------
+Res: Partition [3 5 6 7] being approximated
+Res: Approximated error: 0.594125%	Area percentage: 70.778773%	Time used: 6.222266 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 9, 4, 8, 3]
+[7, 7, 4, 1, 9, 1, 8, 5, 8, 3]
+[7, 7, 4, 1, 9, 1, 10, 3, 8, 3]
+--------------- Iteration 18 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.007691	Circuit area: 1011.000000	Circuit delay: 2351.293818	Power consumption: 501.028844
+Log: In utils.evaluate_design()
+Simulation error: 0.021478	Circuit area: 1017.000000	Circuit delay: 2409.163203	Power consumption: 469.662016
+Log: In utils.evaluate_design()
+Simulation error: 0.007033	Circuit area: 1018.000000	Circuit delay: 2424.154902	Power consumption: 524.111150
+Log: In utils.evaluate_design()
+Simulation error: 0.024131	Circuit area: 1294.000000	Circuit delay: 2626.387812	Power consumption: 608.164642
+Log: In utils.evaluate_design()
+Simulation error: 0.030602	Circuit area: 1043.000000	Circuit delay: 2369.207881	Power consumption: 445.148151
+Log: In utils.evaluate_design()
+Simulation error: 0.011948	Circuit area: 1346.000000	Circuit delay: 2479.096309	Power consumption: 451.052969
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.031633	Circuit area: 1000.000000	Circuit delay: 2445.168086	Power consumption: 441.333133
+Log: In utils.evaluate_design()
+Simulation error: 0.024287	Circuit area: 1238.000000	Circuit delay: 2689.863398	Power consumption: 584.870693
+Log: In utils.evaluate_design()
+Simulation error: 0.021000	Circuit area: 977.000000	Circuit delay: 2411.763545	Power consumption: 454.087218
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 6 to degree 7 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.006752	Circuit area: 923.000000	Circuit delay: 2473.790400	Power consumption: 420.272263
+Log: In utils.evaluate_design()
+Simulation error: 0.011559	Circuit area: 1215.000000	Circuit delay: 2357.118525	Power consumption: 453.642977
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.007832	Circuit area: 903.000000	Circuit delay: 2267.202998	Power consumption: 462.472934
+Log: In utils.evaluate_design()
+Simulation error: 0.024622	Circuit area: 1027.000000	Circuit delay: 2305.394893	Power consumption: 537.998974
+Log: In utils.evaluate_design()
+Simulation error: 0.029846	Circuit area: 1047.000000	Circuit delay: 2369.128779	Power consumption: 484.274467
+Log: In utils.evaluate_design()
+Simulation error: 0.024793	Circuit area: 1260.000000	Circuit delay: 2665.623164	Power consumption: 698.954449
+Log: In utils.evaluate_design()
+Simulation error: 0.011702	Circuit area: 1294.000000	Circuit delay: 2303.603633	Power consumption: 426.532351
+--------------- Finishing Iteration 18---------------
+Res: Partition [3 5 6] being approximated
+Res: Approximated error: 0.675198%	Area percentage: 63.611303%	Time used: 6.077847 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 7, 5, 8, 3]
+[7, 7, 4, 1, 9, 1, 10, 2, 8, 3]
+[7, 7, 4, 1, 9, 1, 8, 4, 8, 3]
+--------------- Iteration 19 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.020961	Circuit area: 921.000000	Circuit delay: 2408.680537	Power consumption: 445.873360
+Log: In utils.evaluate_design()
+Simulation error: 0.031582	Circuit area: 950.000000	Circuit delay: 2454.606562	Power consumption: 469.556777
+Log: In utils.evaluate_design()
+Simulation error: 0.024274	Circuit area: 1179.000000	Circuit delay: 2620.155146	Power consumption: 566.148316
+Log: In utils.evaluate_design()
+Simulation error: 0.007035	Circuit area: 962.000000	Circuit delay: 2468.333369	Power consumption: 514.196930
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 6 to degree 6 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.007093	Circuit area: 858.000000	Circuit delay: 2472.106807	Power consumption: 395.677373
+Log: In utils.evaluate_design()
+Simulation error: 0.011575	Circuit area: 1164.000000	Circuit delay: 2253.540889	Power consumption: 450.401712
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 7 to degree 1 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.008408	Circuit area: 885.000000	Circuit delay: 2391.621455	Power consumption: 462.175667
+Log: In utils.evaluate_design()
+Simulation error: 0.008381	Circuit area: 894.000000	Circuit delay: 2391.837275	Power consumption: 443.442696
+Log: In utils.evaluate_design()
+Simulation error: 0.025720	Circuit area: 900.000000	Circuit delay: 2185.980586	Power consumption: 488.232356
+Log: In utils.evaluate_design()
+Simulation error: 0.025426	Circuit area: 1171.000000	Circuit delay: 2614.784785	Power consumption: 595.584570
+Log: In utils.evaluate_design()
+Simulation error: 0.011889	Circuit area: 924.000000	Circuit delay: 2178.401240	Power consumption: 341.809675
+Log: In utils.evaluate_design()
+Simulation error: 0.027627	Circuit area: 925.000000	Circuit delay: 2362.711543	Power consumption: 437.654118
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.007710	Circuit area: 965.000000	Circuit delay: 2420.495234	Power consumption: 524.612027
+Log: In utils.evaluate_design()
+Simulation error: 0.030284	Circuit area: 1031.000000	Circuit delay: 2288.863643	Power consumption: 498.865906
+Log: In utils.evaluate_design()
+Simulation error: 0.022220	Circuit area: 1018.000000	Circuit delay: 2408.931514	Power consumption: 537.000829
+Log: In utils.evaluate_design()
+Simulation error: 0.012256	Circuit area: 1274.000000	Circuit delay: 2387.965938	Power consumption: 497.872359
+Log: In utils.evaluate_design()
+Simulation error: 0.024975	Circuit area: 1280.000000	Circuit delay: 2668.998164	Power consumption: 654.381351
+--------------- Finishing Iteration 19---------------
+Res: Partition [3 5 6] being approximated
+Res: Approximated error: 0.709321%	Area percentage: 59.131633%	Time used: 5.605662 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 6, 5, 8, 3]
+[7, 7, 4, 1, 9, 1, 7, 4, 8, 3]
+[7, 7, 4, 1, 9, 1, 10, 1, 8, 3]
+--------------- Iteration 20 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.021020	Circuit area: 855.000000	Circuit delay: 2394.570186	Power consumption: 420.841883
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.031559	Circuit area: 885.000000	Circuit delay: 2452.763301	Power consumption: 446.573249
+Log: In utils.evaluate_design()
+Simulation error: 0.024425	Circuit area: 1114.000000	Circuit delay: 2628.113643	Power consumption: 566.969684
+Log: In utils.evaluate_design()
+Simulation error: 0.007271	Circuit area: 904.000000	Circuit delay: 2466.795039	Power consumption: 474.369823
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 6 to degree 5 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.006316	Circuit area: 905.000000	Circuit delay: 2469.159541	Power consumption: 436.410395
+Log: In utils.evaluate_design()
+Simulation error: 0.011591	Circuit area: 944.000000	Circuit delay: 2097.208613	Power consumption: 379.617471
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.022174	Circuit area: 958.000000	Circuit delay: 2411.758662	Power consumption: 517.296139
+Log: In utils.evaluate_design()
+Simulation error: 0.007677	Circuit area: 909.000000	Circuit delay: 2468.465449	Power consumption: 512.046856
+Log: In utils.evaluate_design()
+Simulation error: 0.030237	Circuit area: 975.000000	Circuit delay: 2371.920283	Power consumption: 487.207028
+Log: In utils.evaluate_design()
+Simulation error: 0.024956	Circuit area: 1216.000000	Circuit delay: 2697.775752	Power consumption: 644.362532
+Log: In utils.evaluate_design()
+Simulation error: 0.012277	Circuit area: 1191.000000	Circuit delay: 2389.359492	Power consumption: 470.370607
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.008914	Circuit area: 867.000000	Circuit delay: 2391.821406	Power consumption: 437.435694
+Log: In utils.evaluate_design()
+Simulation error: 0.027573	Circuit area: 901.000000	Circuit delay: 2362.940303	Power consumption: 428.531930
+Log: In utils.evaluate_design()
+Simulation error: 0.026334	Circuit area: 888.000000	Circuit delay: 2337.924189	Power consumption: 504.462805
+Log: In utils.evaluate_design()
+Simulation error: 0.025815	Circuit area: 1151.000000	Circuit delay: 2739.772334	Power consumption: 605.161360
+Log: In utils.evaluate_design()
+Simulation error: 0.011806	Circuit area: 896.000000	Circuit delay: 2228.433955	Power consumption: 351.699797
+--------------- Finishing Iteration 20---------------
+Res: Partition [3 5 6] being approximated
+Res: Approximated error: 0.631597%	Area percentage: 62.370779%	Time used: 5.216264 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 5, 5, 8, 3]
+[7, 7, 4, 1, 9, 1, 6, 4, 8, 3]
+[7, 7, 4, 1, 9, 1, 7, 3, 8, 3]
+--------------- Iteration 21 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.031252	Circuit area: 925.000000	Circuit delay: 2450.169795	Power consumption: 447.930652
+Log: In utils.evaluate_design()
+Simulation error: 0.021227	Circuit area: 903.000000	Circuit delay: 2394.607783	Power consumption: 462.631549
+Log: In utils.evaluate_design()
+Simulation error: 0.024099	Circuit area: 1165.000000	Circuit delay: 2680.494258	Power consumption: 588.913448
+Log: In utils.evaluate_design()
+Simulation error: 0.006911	Circuit area: 936.000000	Circuit delay: 2465.176875	Power consumption: 515.440013
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 6 to degree 4 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.006349	Circuit area: 905.000000	Circuit delay: 2469.159541	Power consumption: 436.410395
+Log: In utils.evaluate_design()
+Simulation error: 0.011936	Circuit area: 1133.000000	Circuit delay: 2346.483027	Power consumption: 455.082918
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.007712	Circuit area: 865.000000	Circuit delay: 2483.298701	Power consumption: 456.754904
+Log: In utils.evaluate_design()
+Simulation error: 0.022031	Circuit area: 899.000000	Circuit delay: 2394.626826	Power consumption: 477.226917
+Log: In utils.evaluate_design()
+Simulation error: 0.025077	Circuit area: 1158.000000	Circuit delay: 2620.174189	Power consumption: 596.607686
+Log: In utils.evaluate_design()
+Simulation error: 0.030225	Circuit area: 918.000000	Circuit delay: 2444.338984	Power consumption: 478.176313
+Log: In utils.evaluate_design()
+Simulation error: 0.012170	Circuit area: 1150.000000	Circuit delay: 2253.198848	Power consumption: 429.271953
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.008309	Circuit area: 875.000000	Circuit delay: 2391.833369	Power consumption: 449.645566
+Log: In utils.evaluate_design()
+Simulation error: 0.023751	Circuit area: 904.000000	Circuit delay: 2411.999385	Power consumption: 512.721774
+Log: In utils.evaluate_design()
+Simulation error: 0.028974	Circuit area: 930.000000	Circuit delay: 2453.092402	Power consumption: 475.186185
+Log: In utils.evaluate_design()
+Simulation error: 0.025524	Circuit area: 1173.000000	Circuit delay: 2772.334346	Power consumption: 637.915800
+Log: In utils.evaluate_design()
+Simulation error: 0.011952	Circuit area: 1207.000000	Circuit delay: 2267.085566	Power consumption: 455.635134
+--------------- Finishing Iteration 21---------------
+Res: Partition [3 5 6] being approximated
+Res: Approximated error: 0.634938%	Area percentage: 62.370779%	Time used: 5.533597 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 4, 5, 8, 3]
+[7, 7, 4, 1, 9, 1, 6, 3, 8, 3]
+[7, 7, 4, 1, 9, 1, 5, 4, 8, 3]
+--------------- Iteration 22 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.021240	Circuit area: 894.000000	Circuit delay: 2305.426387	Power consumption: 462.388794
+Log: In utils.evaluate_design()
+Simulation error: 0.031281	Circuit area: 925.000000	Circuit delay: 2450.169795	Power consumption: 448.041072
+Log: In utils.evaluate_design()
+Simulation error: 0.024109	Circuit area: 1165.000000	Circuit delay: 2680.494258	Power consumption: 588.913448
+Log: In utils.evaluate_design()
+Simulation error: 0.006902	Circuit area: 936.000000	Circuit delay: 2465.176875	Power consumption: 515.440013
+Log: In utils.evaluate_design()
+Simulation error: 0.011935	Circuit area: 1133.000000	Circuit delay: 2346.483027	Power consumption: 455.082918
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 6 to degree 3 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.006395	Circuit area: 863.000000	Circuit delay: 2469.220332	Power consumption: 412.184658
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.008313	Circuit area: 820.000000	Circuit delay: 2391.690303	Power consumption: 432.468485
+Log: In utils.evaluate_design()
+Simulation error: 0.023759	Circuit area: 862.000000	Circuit delay: 2394.568232	Power consumption: 485.001627
+Log: In utils.evaluate_design()
+Simulation error: 0.007508	Circuit area: 885.000000	Circuit delay: 2430.967891	Power consumption: 490.191625
+Log: In utils.evaluate_design()
+Simulation error: 0.029033	Circuit area: 888.000000	Circuit delay: 2451.761348	Power consumption: 447.455066
+Log: In utils.evaluate_design()
+Simulation error: 0.025533	Circuit area: 1125.000000	Circuit delay: 2756.161982	Power consumption: 615.903060
+Log: In utils.evaluate_design()
+Simulation error: 0.011913	Circuit area: 1062.000000	Circuit delay: 2269.772334	Power consumption: 416.653376
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.022483	Circuit area: 937.000000	Circuit delay: 2395.122676	Power consumption: 519.982015
+Log: In utils.evaluate_design()
+Simulation error: 0.030039	Circuit area: 954.000000	Circuit delay: 2284.057979	Power consumption: 487.155921
+Log: In utils.evaluate_design()
+Simulation error: 0.024849	Circuit area: 1189.000000	Circuit delay: 2651.730342	Power consumption: 656.564021
+Log: In utils.evaluate_design()
+Simulation error: 0.012145	Circuit area: 1220.000000	Circuit delay: 2412.907100	Power consumption: 447.945611
+--------------- Finishing Iteration 22---------------
+Res: Partition [3 5 6] being approximated
+Res: Approximated error: 0.639466%	Area percentage: 59.476223%	Time used: 5.648746 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 3, 5, 8, 3]
+[7, 7, 4, 1, 9, 1, 6, 2, 8, 3]
+[7, 7, 4, 1, 9, 1, 5, 3, 8, 3]
+--------------- Iteration 23 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.021273	Circuit area: 852.000000	Circuit delay: 2305.349482	Power consumption: 437.750015
+Log: In utils.evaluate_design()
+Simulation error: 0.031476	Circuit area: 890.000000	Circuit delay: 2452.616328	Power consumption: 459.387171
+Log: In utils.evaluate_design()
+Simulation error: 0.024117	Circuit area: 1121.000000	Circuit delay: 2639.786738	Power consumption: 583.251938
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 6 to degree 2 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.007826	Circuit area: 843.000000	Circuit delay: 2397.369746	Power consumption: 393.140042
+Log: In utils.evaluate_design()
+Simulation error: 0.006859	Circuit area: 904.000000	Circuit delay: 2465.176875	Power consumption: 499.158865
+Log: In utils.evaluate_design()
+Simulation error: 0.011924	Circuit area: 978.000000	Circuit delay: 2291.169795	Power consumption: 400.890072
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.008832	Circuit area: 794.000000	Circuit delay: 2391.804805	Power consumption: 429.211359
+Log: In utils.evaluate_design()
+Simulation error: 0.008289	Circuit area: 854.000000	Circuit delay: 2391.646846	Power consumption: 448.209466
+Log: In utils.evaluate_design()
+Simulation error: 0.024862	Circuit area: 816.000000	Circuit delay: 2323.017451	Power consumption: 475.583685
+Log: In utils.evaluate_design()
+Simulation error: 0.027524	Circuit area: 835.000000	Circuit delay: 2359.227900	Power consumption: 400.601508
+Log: In utils.evaluate_design()
+Simulation error: 0.026184	Circuit area: 1089.000000	Circuit delay: 2713.119990	Power consumption: 600.351661
+Log: In utils.evaluate_design()
+Simulation error: 0.012154	Circuit area: 821.000000	Circuit delay: 2071.441035	Power consumption: 293.317105
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.007515	Circuit area: 885.000000	Circuit delay: 2465.176875	Power consumption: 510.116806
+Log: In utils.evaluate_design()
+Simulation error: 0.023695	Circuit area: 871.000000	Circuit delay: 2305.722285	Power consumption: 515.571388
+Log: In utils.evaluate_design()
+Simulation error: 0.028646	Circuit area: 908.000000	Circuit delay: 2363.852656	Power consumption: 478.511356
+Log: In utils.evaluate_design()
+Simulation error: 0.025483	Circuit area: 1133.000000	Circuit delay: 2579.778193	Power consumption: 670.921057
+Log: In utils.evaluate_design()
+Simulation error: 0.012000	Circuit area: 1169.000000	Circuit delay: 2256.656123	Power consumption: 489.029393
+--------------- Finishing Iteration 23---------------
+Res: Partition [3 5 6 7] being approximated
+Res: Approximated error: 0.685857%	Area percentage: 62.301861%	Time used: 5.421840 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 3, 4, 8, 3]
+[7, 7, 4, 1, 9, 1, 2, 5, 8, 3]
+[7, 7, 4, 1, 9, 1, 4, 3, 8, 3]
+--------------- Iteration 24 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.007533	Circuit area: 866.000000	Circuit delay: 2465.176875	Power consumption: 489.614147
+Log: In utils.evaluate_design()
+Simulation error: 0.008137	Circuit area: 879.000000	Circuit delay: 2463.014033	Power consumption: 428.198517
+Log: In utils.evaluate_design()
+Simulation error: 0.030037	Circuit area: 897.000000	Circuit delay: 2283.746943	Power consumption: 428.066007
+Log: In utils.evaluate_design()
+Simulation error: 0.022384	Circuit area: 876.000000	Circuit delay: 2394.568232	Power consumption: 461.228017
+Log: In utils.evaluate_design()
+Simulation error: 0.024843	Circuit area: 1160.000000	Circuit delay: 2676.729609	Power consumption: 619.305414
+Log: In utils.evaluate_design()
+Simulation error: 0.012001	Circuit area: 1179.000000	Circuit delay: 2252.492061	Power consumption: 439.008378
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.021501	Circuit area: 839.000000	Circuit delay: 2305.349482	Power consumption: 426.230836
+Log: In utils.evaluate_design()
+Simulation error: 0.031450	Circuit area: 877.000000	Circuit delay: 2452.616328	Power consumption: 447.708648
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 6 to degree 1 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.007826	Circuit area: 843.000000	Circuit delay: 2397.369746	Power consumption: 393.140042
+Log: In utils.evaluate_design()
+Simulation error: 0.025208	Circuit area: 1106.000000	Circuit delay: 2620.155146	Power consumption: 546.834082
+Log: In utils.evaluate_design()
+Simulation error: 0.011543	Circuit area: 968.000000	Circuit delay: 2247.880000	Power consumption: 376.349577
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.008282	Circuit area: 840.000000	Circuit delay: 2391.646846	Power consumption: 437.222916
+Log: In utils.evaluate_design()
+Simulation error: 0.023694	Circuit area: 874.000000	Circuit delay: 2391.417842	Power consumption: 509.923266
+Log: In utils.evaluate_design()
+Simulation error: 0.028657	Circuit area: 896.000000	Circuit delay: 2450.169795	Power consumption: 470.534433
+Log: In utils.evaluate_design()
+Simulation error: 0.025481	Circuit area: 1114.000000	Circuit delay: 2675.407100	Power consumption: 633.578049
+Log: In utils.evaluate_design()
+Simulation error: 0.011986	Circuit area: 1169.000000	Circuit delay: 2257.158076	Power consumption: 489.124446
+--------------- Finishing Iteration 24---------------
+Res: Partition [3 5 6] being approximated
+Res: Approximated error: 0.782576%	Area percentage: 58.097864%	Time used: 5.622079 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 1, 5, 8, 3]
+[7, 7, 4, 1, 9, 1, 3, 3, 8, 3]
+[7, 7, 4, 1, 9, 1, 4, 2, 8, 3]
+--------------- Iteration 25 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.021501	Circuit area: 839.000000	Circuit delay: 2305.349482	Power consumption: 426.230836
+Log: In utils.evaluate_design()
+Simulation error: 0.025208	Circuit area: 1106.000000	Circuit delay: 2620.155146	Power consumption: 546.834082
+Log: In utils.evaluate_design()
+Simulation error: 0.031450	Circuit area: 877.000000	Circuit delay: 2452.616328	Power consumption: 447.708648
+Log: In utils.evaluate_design()
+Simulation error: 0.008137	Circuit area: 879.000000	Circuit delay: 2463.014033	Power consumption: 428.198517
+Log: In utils.evaluate_design()
+Simulation error: 0.011543	Circuit area: 968.000000	Circuit delay: 2247.880000	Power consumption: 376.349577
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.007679	Circuit area: 855.000000	Circuit delay: 2481.699092	Power consumption: 455.955102
+Log: In utils.evaluate_design()
+Simulation error: 0.008317	Circuit area: 811.000000	Circuit delay: 2267.202998	Power consumption: 425.876293
+Log: In utils.evaluate_design()
+Simulation error: 0.023700	Circuit area: 862.000000	Circuit delay: 2394.568232	Power consumption: 490.722770
+Log: In utils.evaluate_design()
+Simulation error: 0.028901	Circuit area: 887.000000	Circuit delay: 2450.169795	Power consumption: 453.627406
+Log: In utils.evaluate_design()
+Simulation error: 0.025480	Circuit area: 1119.000000	Circuit delay: 2753.256221	Power consumption: 638.724305
+Log: In utils.evaluate_design()
+Simulation error: 0.011984	Circuit area: 1117.000000	Circuit delay: 2270.489131	Power consumption: 424.552505
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.008834	Circuit area: 790.000000	Circuit delay: 2391.762080	Power consumption: 428.622589
+Log: In utils.evaluate_design()
+Simulation error: 0.024842	Circuit area: 829.000000	Circuit delay: 2309.347529	Power consumption: 458.806404
+Log: In utils.evaluate_design()
+Simulation error: 0.026176	Circuit area: 1090.000000	Circuit delay: 2696.884150	Power consumption: 586.447131
+Log: In utils.evaluate_design()
+Simulation error: 0.027384	Circuit area: 852.000000	Circuit delay: 2359.160029	Power consumption: 401.972473
+Log: In utils.evaluate_design()
+Simulation error: 0.012153	Circuit area: 897.000000	Circuit delay: 2178.323848	Power consumption: 350.204500
+--------------- Finishing Iteration 25---------------
+Res: Partition [3 5 6 7] being approximated
+Res: Approximated error: 0.767950%	Area percentage: 58.924879%	Time used: 5.254972 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 2, 3, 8, 3]
+[7, 7, 4, 1, 9, 1, 3, 2, 8, 3]
+[7, 7, 4, 1, 9, 1, 4, 1, 8, 3]
+--------------- Iteration 26 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.008317	Circuit area: 812.000000	Circuit delay: 2267.247188	Power consumption: 427.145947
+Log: In utils.evaluate_design()
+Simulation error: 0.023716	Circuit area: 853.000000	Circuit delay: 2394.568232	Power consumption: 479.298556
+Log: In utils.evaluate_design()
+Simulation error: 0.007679	Circuit area: 855.000000	Circuit delay: 2481.699092	Power consumption: 455.955102
+Log: In utils.evaluate_design()
+Simulation error: 0.028387	Circuit area: 878.000000	Circuit delay: 2452.952266	Power consumption: 442.033459
+Log: In utils.evaluate_design()
+Simulation error: 0.025516	Circuit area: 1102.000000	Circuit delay: 2690.322871	Power consumption: 627.839705
+Log: In utils.evaluate_design()
+Simulation error: 0.011928	Circuit area: 1059.000000	Circuit delay: 2252.571650	Power consumption: 417.272560
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.008834	Circuit area: 790.000000	Circuit delay: 2391.762080	Power consumption: 428.622589
+Log: In utils.evaluate_design()
+Simulation error: 0.024857	Circuit area: 796.000000	Circuit delay: 2185.980586	Power consumption: 455.397152
+Log: In utils.evaluate_design()
+Simulation error: 0.027521	Circuit area: 831.000000	Circuit delay: 2359.174678	Power consumption: 399.998302
+Log: In utils.evaluate_design()
+Simulation error: 0.012163	Circuit area: 842.000000	Circuit delay: 2225.197871	Power consumption: 321.392203
+Log: In utils.evaluate_design()
+Simulation error: 0.026187	Circuit area: 1084.000000	Circuit delay: 2713.119990	Power consumption: 600.003230
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.025472	Circuit area: 779.000000	Circuit delay: 2306.343867	Power consumption: 452.780718
+Log: In utils.evaluate_design()
+Simulation error: 0.027424	Circuit area: 807.000000	Circuit delay: 2359.132197	Power consumption: 391.094596
+Log: In utils.evaluate_design()
+Simulation error: 0.026573	Circuit area: 1052.000000	Circuit delay: 2691.661250	Power consumption: 583.186513
+Log: In utils.evaluate_design()
+Simulation error: 0.012059	Circuit area: 796.000000	Circuit delay: 2228.433711	Power consumption: 333.630363
+--------------- Finishing Iteration 26---------------
+Res: Partition [3 5 6 7] being approximated
+Res: Approximated error: 0.767950%	Area percentage: 58.924879%	Time used: 4.882707 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 1, 3, 8, 3]
+[7, 7, 4, 1, 9, 1, 2, 2, 8, 3]
+[7, 7, 4, 1, 9, 1, 3, 1, 8, 3]
+--------------- Iteration 27 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.008317	Circuit area: 812.000000	Circuit delay: 2267.247188	Power consumption: 427.145947
+Log: In utils.evaluate_design()
+Simulation error: 0.023716	Circuit area: 853.000000	Circuit delay: 2394.568232	Power consumption: 479.298556
+Log: In utils.evaluate_design()
+Simulation error: 0.028387	Circuit area: 878.000000	Circuit delay: 2452.952266	Power consumption: 442.033459
+Log: In utils.evaluate_design()
+Simulation error: 0.025516	Circuit area: 1102.000000	Circuit delay: 2690.322871	Power consumption: 627.839705
+Log: In utils.evaluate_design()
+Simulation error: 0.011928	Circuit area: 1059.000000	Circuit delay: 2252.571650	Power consumption: 417.272560
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.008834	Circuit area: 790.000000	Circuit delay: 2391.762080	Power consumption: 428.622589
+Log: In utils.evaluate_design()
+Simulation error: 0.024857	Circuit area: 797.000000	Circuit delay: 2186.025020	Power consumption: 456.341339
+Log: In utils.evaluate_design()
+Simulation error: 0.026187	Circuit area: 1061.000000	Circuit delay: 2649.620234	Power consumption: 599.687977
+Log: In utils.evaluate_design()
+Simulation error: 0.027521	Circuit area: 827.000000	Circuit delay: 2359.175898	Power consumption: 402.023754
+Log: In utils.evaluate_design()
+Simulation error: 0.012163	Circuit area: 840.000000	Circuit delay: 2263.203730	Power consumption: 327.170943
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.025472	Circuit area: 779.000000	Circuit delay: 2306.343867	Power consumption: 452.780718
+Log: In utils.evaluate_design()
+Simulation error: 0.027424	Circuit area: 807.000000	Circuit delay: 2359.132197	Power consumption: 391.094596
+Log: In utils.evaluate_design()
+Simulation error: 0.026573	Circuit area: 1052.000000	Circuit delay: 2691.661250	Power consumption: 583.186513
+Log: In utils.evaluate_design()
+Simulation error: 0.012059	Circuit area: 796.000000	Circuit delay: 2228.433711	Power consumption: 333.630363
+--------------- Finishing Iteration 27---------------
+Res: Partition [3 5 6 7] being approximated
+Res: Approximated error: 0.831740%	Area percentage: 55.961406%	Time used: 4.833369 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 1, 2, 8, 3]
+[7, 7, 4, 1, 9, 1, 2, 1, 8, 3]
+[7, 7, 4, 1, 9, 1, 3, 1, 7, 3]
+--------------- Iteration 28 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.008834	Circuit area: 790.000000	Circuit delay: 2391.762080	Power consumption: 428.622589
+Log: In utils.evaluate_design()
+Simulation error: 0.027521	Circuit area: 827.000000	Circuit delay: 2359.175898	Power consumption: 402.023754
+Log: In utils.evaluate_design()
+Simulation error: 0.024857	Circuit area: 797.000000	Circuit delay: 2186.025020	Power consumption: 456.341339
+Log: In utils.evaluate_design()
+Simulation error: 0.026187	Circuit area: 1061.000000	Circuit delay: 2649.620234	Power consumption: 599.687977
+Log: In utils.evaluate_design()
+Simulation error: 0.012163	Circuit area: 840.000000	Circuit delay: 2263.203730	Power consumption: 327.170943
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.025472	Circuit area: 779.000000	Circuit delay: 2306.343867	Power consumption: 452.780718
+Log: In utils.evaluate_design()
+Simulation error: 0.027424	Circuit area: 807.000000	Circuit delay: 2359.132197	Power consumption: 391.104608
+Log: In utils.evaluate_design()
+Simulation error: 0.012059	Circuit area: 801.000000	Circuit delay: 2228.556270	Power consumption: 329.953560
+Log: In utils.evaluate_design()
+Simulation error: 0.026573	Circuit area: 1052.000000	Circuit delay: 2691.661250	Power consumption: 583.186513
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.028320	Circuit area: 745.000000	Circuit delay: 2042.156123	Power consumption: 295.188336
+Log: In utils.evaluate_design()
+Simulation error: 0.024012	Circuit area: 773.000000	Circuit delay: 2258.942988	Power consumption: 340.563827
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 8 to degree 6 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.012098	Circuit area: 764.000000	Circuit delay: 1862.816890	Power consumption: 290.576572
+Log: In utils.evaluate_design()
+Simulation error: 0.026001	Circuit area: 1055.000000	Circuit delay: 2655.949092	Power consumption: 493.644678
+--------------- Finishing Iteration 28---------------
+Res: Partition [3 5 6 7] being approximated
+Res: Approximated error: 0.883435%	Area percentage: 54.445210%	Time used: 5.009869 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 1, 1, 8, 3]
+[7, 7, 4, 1, 9, 1, 3, 1, 6, 3]
+[7, 7, 4, 1, 9, 1, 2, 1, 7, 3]
+--------------- Iteration 29 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.027424	Circuit area: 807.000000	Circuit delay: 2359.132197	Power consumption: 391.104608
+Log: In utils.evaluate_design()
+Simulation error: 0.025472	Circuit area: 779.000000	Circuit delay: 2306.343867	Power consumption: 452.780718
+Log: In utils.evaluate_design()
+Simulation error: 0.026573	Circuit area: 1052.000000	Circuit delay: 2691.661250	Power consumption: 583.186513
+Log: In utils.evaluate_design()
+Simulation error: 0.012059	Circuit area: 801.000000	Circuit delay: 2228.556270	Power consumption: 329.953560
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.024694	Circuit area: 717.000000	Circuit delay: 2160.352656	Power consumption: 317.230501
+Log: In utils.evaluate_design()
+Simulation error: 0.012098	Circuit area: 768.000000	Circuit delay: 1859.584224	Power consumption: 288.090872
+Log: In utils.evaluate_design()
+Simulation error: 0.028469	Circuit area: 765.000000	Circuit delay: 2065.861445	Power consumption: 326.375593
+Log: In utils.evaluate_design()
+Simulation error: 0.026326	Circuit area: 989.000000	Circuit delay: 2211.619746	Power consumption: 411.941262
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 8 to degree 5 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.014227	Circuit area: 716.000000	Circuit delay: 1860.815791	Power consumption: 265.573268
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.024012	Circuit area: 768.000000	Circuit delay: 2258.942988	Power consumption: 325.120636
+Log: In utils.evaluate_design()
+Simulation error: 0.028320	Circuit area: 745.000000	Circuit delay: 2042.156123	Power consumption: 295.188336
+Log: In utils.evaluate_design()
+Simulation error: 0.026001	Circuit area: 1047.000000	Circuit delay: 2664.042109	Power consumption: 491.313811
+--------------- Finishing Iteration 29---------------
+Res: Partition [3 5 6 7 8] being approximated
+Res: Approximated error: 1.209842%	Area percentage: 52.929014%	Time used: 4.800465 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 2, 1, 6, 3]
+[7, 7, 4, 1, 9, 1, 1, 1, 7, 3]
+[7, 7, 4, 1, 9, 1, 3, 1, 5, 3]
+--------------- Iteration 30 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.014227	Circuit area: 716.000000	Circuit delay: 1860.815791	Power consumption: 265.573268
+Log: In utils.evaluate_design()
+Simulation error: 0.012098	Circuit area: 768.000000	Circuit delay: 1859.584224	Power consumption: 288.090872
+Log: In utils.evaluate_design()
+Simulation error: 0.024694	Circuit area: 738.000000	Circuit delay: 2160.128535	Power consumption: 315.923739
+Log: In utils.evaluate_design()
+Simulation error: 0.028469	Circuit area: 765.000000	Circuit delay: 2065.861445	Power consumption: 326.375593
+Log: In utils.evaluate_design()
+Simulation error: 0.026326	Circuit area: 992.000000	Circuit delay: 2341.587275	Power consumption: 406.318606
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.024012	Circuit area: 768.000000	Circuit delay: 2258.942988	Power consumption: 325.120636
+Log: In utils.evaluate_design()
+Simulation error: 0.026001	Circuit area: 1047.000000	Circuit delay: 2664.042109	Power consumption: 491.313811
+Log: In utils.evaluate_design()
+Simulation error: 0.028320	Circuit area: 745.000000	Circuit delay: 2042.156123	Power consumption: 295.188336
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.025621	Circuit area: 718.000000	Circuit delay: 2012.012690	Power consumption: 302.598637
+Log: In utils.evaluate_design()
+Simulation error: 0.031116	Circuit area: 706.000000	Circuit delay: 1934.541743	Power consumption: 275.053579
+Log: In utils.evaluate_design()
+Simulation error: 0.027360	Circuit area: 965.000000	Circuit delay: 2354.316035	Power consumption: 409.388391
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 8 to degree 4 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.015203	Circuit area: 664.000000	Circuit delay: 1817.517329	Power consumption: 240.562498
+--------------- Finishing Iteration 30---------------
+Res: Partition [3 5 6 7 8] being approximated
+Res: Approximated error: 1.209842%	Area percentage: 52.929014%	Time used: 4.946449 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 1, 1, 6, 3]
+[7, 7, 4, 1, 9, 1, 3, 1, 4, 3]
+[7, 7, 4, 1, 9, 1, 2, 1, 5, 3]
+--------------- Iteration 31 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.014227	Circuit area: 716.000000	Circuit delay: 1860.815791	Power consumption: 265.573268
+Log: In utils.evaluate_design()
+Simulation error: 0.028469	Circuit area: 765.000000	Circuit delay: 2065.861445	Power consumption: 326.375593
+Log: In utils.evaluate_design()
+Simulation error: 0.024694	Circuit area: 738.000000	Circuit delay: 2160.128535	Power consumption: 315.923739
+Log: In utils.evaluate_design()
+Simulation error: 0.026326	Circuit area: 992.000000	Circuit delay: 2341.587275	Power consumption: 406.318606
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 8 to degree 3 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.016071	Circuit area: 645.000000	Circuit delay: 1934.706782	Power consumption: 239.766712
+Log: In utils.evaluate_design()
+Simulation error: 0.015203	Circuit area: 664.000000	Circuit delay: 1817.517329	Power consumption: 240.562498
+Log: In utils.evaluate_design()
+Simulation error: 0.027651	Circuit area: 665.000000	Circuit delay: 1818.464229	Power consumption: 284.379581
+Log: In utils.evaluate_design()
+Simulation error: 0.031116	Circuit area: 679.000000	Circuit delay: 1934.545527	Power consumption: 274.810154
+Log: In utils.evaluate_design()
+Simulation error: 0.028589	Circuit area: 937.000000	Circuit delay: 2381.701777	Power consumption: 395.416311
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.025621	Circuit area: 718.000000	Circuit delay: 2012.012690	Power consumption: 302.598637
+Log: In utils.evaluate_design()
+Simulation error: 0.031116	Circuit area: 706.000000	Circuit delay: 1934.541743	Power consumption: 275.053579
+Log: In utils.evaluate_design()
+Simulation error: 0.027360	Circuit area: 965.000000	Circuit delay: 2354.316035	Power consumption: 409.388391
+--------------- Finishing Iteration 31---------------
+Res: Partition [3 5 6 7 8] being approximated
+Res: Approximated error: 1.520306%	Area percentage: 45.761544%	Time used: 4.751986 sec
+
+Log: Reach threshold on 0.01
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 2, 1, 4, 3]
+[7, 7, 4, 1, 9, 1, 1, 1, 5, 3]
+[7, 7, 4, 1, 9, 1, 3, 1, 3, 3]
+--------------- Iteration 32 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.016071	Circuit area: 645.000000	Circuit delay: 1934.706782	Power consumption: 239.766698
+Log: In utils.evaluate_design()
+Simulation error: 0.027651	Circuit area: 665.000000	Circuit delay: 1818.464229	Power consumption: 284.379581
+Log: In utils.evaluate_design()
+Simulation error: 0.015203	Circuit area: 664.000000	Circuit delay: 1817.517329	Power consumption: 240.562498
+Log: In utils.evaluate_design()
+Simulation error: 0.028589	Circuit area: 937.000000	Circuit delay: 2381.701777	Power consumption: 395.416311
+Log: In utils.evaluate_design()
+Simulation error: 0.031116	Circuit area: 679.000000	Circuit delay: 1934.545527	Power consumption: 274.810154
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.025621	Circuit area: 718.000000	Circuit delay: 2012.012690	Power consumption: 302.598637
+Log: In utils.evaluate_design()
+Simulation error: 0.031116	Circuit area: 706.000000	Circuit delay: 1934.541743	Power consumption: 275.053579
+Log: In utils.evaluate_design()
+Simulation error: 0.027360	Circuit area: 965.000000	Circuit delay: 2354.316035	Power consumption: 409.388391
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.026631	Circuit area: 626.000000	Circuit delay: 1955.125972	Power consumption: 296.972168
+Log: In utils.evaluate_design()
+Simulation error: 0.028554	Circuit area: 631.000000	Circuit delay: 1934.542598	Power consumption: 273.053534
+Log: In utils.evaluate_design()
+Simulation error: 0.028408	Circuit area: 886.000000	Circuit delay: 2390.941523	Power consumption: 375.346659
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 8 to degree 2 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.017074	Circuit area: 588.000000	Circuit delay: 1869.257808	Power consumption: 245.143106
+--------------- Finishing Iteration 32---------------
+Res: Partition [3 5 6 7 8] being approximated
+Res: Approximated error: 1.520306%	Area percentage: 45.761544%	Time used: 3.921138 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 1, 1, 4, 3]
+[7, 7, 4, 1, 9, 1, 3, 1, 2, 3]
+[7, 7, 4, 1, 9, 1, 2, 1, 3, 3]
+--------------- Iteration 33 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.016071	Circuit area: 645.000000	Circuit delay: 1934.706782	Power consumption: 239.766698
+Log: In utils.evaluate_design()
+Simulation error: 0.027651	Circuit area: 665.000000	Circuit delay: 1818.464229	Power consumption: 284.379581
+Log: In utils.evaluate_design()
+Simulation error: 0.028589	Circuit area: 937.000000	Circuit delay: 2381.701777	Power consumption: 395.416311
+Log: In utils.evaluate_design()
+Simulation error: 0.031116	Circuit area: 679.000000	Circuit delay: 1934.545527	Power consumption: 274.810154
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.032222	Circuit area: 570.000000	Circuit delay: 1898.580562	Power consumption: 248.376600
+Log: In utils.evaluate_design()
+Simulation error: 0.027491	Circuit area: 589.000000	Circuit delay: 2004.642573	Power consumption: 217.963840
+Log: In utils.evaluate_design()
+Simulation error: 0.017074	Circuit area: 588.000000	Circuit delay: 1869.257808	Power consumption: 245.143106
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 8 to degree 1 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.017074	Circuit area: 588.000000	Circuit delay: 1869.257808	Power consumption: 245.143106
+Log: In utils.evaluate_design()
+Simulation error: 0.031229	Circuit area: 841.000000	Circuit delay: 2105.248896	Power consumption: 404.536375
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.026631	Circuit area: 626.000000	Circuit delay: 1955.125972	Power consumption: 296.972168
+Log: In utils.evaluate_design()
+Simulation error: 0.028554	Circuit area: 631.000000	Circuit delay: 1934.542598	Power consumption: 273.053534
+Log: In utils.evaluate_design()
+Simulation error: 0.028408	Circuit area: 886.000000	Circuit delay: 2390.941523	Power consumption: 375.346659
+--------------- Finishing Iteration 33---------------
+Res: Partition [3 5 6 7 8] being approximated
+Res: Approximated error: 1.707371%	Area percentage: 40.523777%	Time used: 3.281626 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 2, 1, 2, 3]
+[7, 7, 4, 1, 9, 1, 3, 1, 1, 3]
+[7, 7, 4, 1, 9, 1, 1, 1, 3, 3]
+--------------- Iteration 34 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.017074	Circuit area: 588.000000	Circuit delay: 1869.257808	Power consumption: 245.143106
+Log: In utils.evaluate_design()
+Simulation error: 0.027491	Circuit area: 589.000000	Circuit delay: 2004.642573	Power consumption: 217.963840
+Log: In utils.evaluate_design()
+Simulation error: 0.017074	Circuit area: 588.000000	Circuit delay: 1869.257808	Power consumption: 245.143106
+Log: In utils.evaluate_design()
+Simulation error: 0.032222	Circuit area: 570.000000	Circuit delay: 1898.580562	Power consumption: 248.376600
+Log: In utils.evaluate_design()
+Simulation error: 0.031229	Circuit area: 841.000000	Circuit delay: 2105.248896	Power consumption: 404.536375
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.032222	Circuit area: 570.000000	Circuit delay: 1898.580562	Power consumption: 248.376600
+Log: In utils.evaluate_design()
+Simulation error: 0.027491	Circuit area: 589.000000	Circuit delay: 2004.642573	Power consumption: 217.963840
+Log: In utils.evaluate_design()
+Simulation error: 0.031229	Circuit area: 841.000000	Circuit delay: 2105.248896	Power consumption: 404.536375
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.026631	Circuit area: 626.000000	Circuit delay: 1955.125972	Power consumption: 296.972168
+Log: In utils.evaluate_design()
+Simulation error: 0.028554	Circuit area: 631.000000	Circuit delay: 1934.542598	Power consumption: 273.053534
+Log: In utils.evaluate_design()
+Simulation error: 0.028408	Circuit area: 886.000000	Circuit delay: 2390.941523	Power consumption: 375.346659
+--------------- Finishing Iteration 34---------------
+Res: Partition [3 5 6 7 8] being approximated
+Res: Approximated error: 1.707371%	Area percentage: 40.523777%	Time used: 2.620778 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 1, 1, 2, 3]
+[7, 7, 4, 1, 9, 1, 2, 1, 1, 3]
+[7, 7, 4, 1, 9, 1, 2, 1, 2, 2]
+--------------- Iteration 35 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.017074	Circuit area: 588.000000	Circuit delay: 1869.257808	Power consumption: 245.143106
+Log: In utils.evaluate_design()
+Simulation error: 0.027491	Circuit area: 589.000000	Circuit delay: 2004.642573	Power consumption: 217.963840
+Log: In utils.evaluate_design()
+Simulation error: 0.032222	Circuit area: 570.000000	Circuit delay: 1898.580562	Power consumption: 248.376600
+Log: In utils.evaluate_design()
+Simulation error: 0.031229	Circuit area: 841.000000	Circuit delay: 2105.248896	Power consumption: 404.536375
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.032222	Circuit area: 570.000000	Circuit delay: 1898.580562	Power consumption: 248.376600
+Log: In utils.evaluate_design()
+Simulation error: 0.027491	Circuit area: 589.000000	Circuit delay: 2004.642573	Power consumption: 217.963840
+Log: In utils.evaluate_design()
+Simulation error: 0.031229	Circuit area: 841.000000	Circuit delay: 2105.248896	Power consumption: 404.536375
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: ----- Approximating part 9 to degree 1 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.028569	Circuit area: 589.000000	Circuit delay: 1729.171870	Power consumption: 217.815992
+Log: In utils.evaluate_design()
+Simulation error: 0.035150	Circuit area: 865.000000	Circuit delay: 2330.849971	Power consumption: 394.256378
+Log: In utils.evaluate_design()
+Simulation error: 0.035434	Circuit area: 568.000000	Circuit delay: 1647.864497	Power consumption: 215.493274
+--------------- Finishing Iteration 35---------------
+Res: Partition [3 5 6 7 8] being approximated
+Res: Approximated error: 1.707371%	Area percentage: 40.523777%	Time used: 2.578630 sec
+
+Log: Current stream of factorization degree:  [7, 7, 4, 1, 9, 1, 1, 1, 1, 3]
+[7, 7, 4, 1, 9, 1, 1, 1, 2, 2]
+[7, 7, 4, 1, 9, 1, 2, 1, 1, 2]
+--------------- Iteration 36 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.032222	Circuit area: 570.000000	Circuit delay: 1898.580562	Power consumption: 248.376600
+Log: In utils.evaluate_design()
+Simulation error: 0.027491	Circuit area: 589.000000	Circuit delay: 2004.642573	Power consumption: 217.963840
+Log: In utils.evaluate_design()
+Simulation error: 0.031229	Circuit area: 841.000000	Circuit delay: 2105.248896	Power consumption: 404.536375
+========== TRACK 1 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.028569	Circuit area: 589.000000	Circuit delay: 1729.171870	Power consumption: 217.815992
+Log: In utils.evaluate_design()
+Simulation error: 0.035434	Circuit area: 568.000000	Circuit delay: 1647.864497	Power consumption: 215.493274
+Log: In utils.evaluate_design()
+Simulation error: 0.035150	Circuit area: 865.000000	Circuit delay: 2330.849971	Power consumption: 394.256378
+========== TRACK 2 ==========
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Log: In utils.evaluate_design()
+Simulation error: 0.028569	Circuit area: 589.000000	Circuit delay: 1729.171870	Power consumption: 217.815992
+Log: In utils.evaluate_design()
+Simulation error: 0.035434	Circuit area: 568.000000	Circuit delay: 1647.864497	Power consumption: 215.493274
+Log: In utils.evaluate_design()
+Simulation error: 0.035150	Circuit area: 865.000000	Circuit delay: 2330.849971	Power consumption: 394.256378
+--------------- Finishing Iteration 36---------------
+Res: Partition [3 5 6 7 8 9] being approximated
+Res: Approximated error: 2.749127%	Area percentage: 40.592695%	Time used: 2.494844 sec
+
+Log: Reach threshold on 0.02
+Log: Reach error threshold. Exit approximation.
