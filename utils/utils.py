@@ -15,18 +15,11 @@ class NoValidDesign(Exception):
 
 
 def evaluate_design(k_stream, worker, filename, display=True):
-<<<<<<< HEAD
     print("Log: In utils.evaluate_design()")
     verilog_list = [os.path.join(worker.output, 'partition', worker.modulename + '.v')]
     if display:
         print('Evaluating Design:', k_stream)
         
-=======
-    if display:
-        print('Evaluating Design:', k_stream)
-    verilog_list = [os.path.join(worker.output, 'partition', worker.modulename + '.v')]
-
->>>>>>> origin/master
     # Parse each subcircuit
     for i, modulename in enumerate(worker.modulenames):
         approx_degree = k_stream[i]
@@ -40,22 +33,15 @@ def evaluate_design(k_stream, worker, filename, display=True):
         part_verilog = os.path.join(worker.output, 'bmf_partition', modulename, modulename + '_approx_k=' + str(approx_degree) + '.v')
         # If has not been approximated before
         if not os.path.exists(part_verilog):
-<<<<<<< HEAD
             print('Log: ----- Approximating part ' + str(i) + ' to degree ' + str(approx_degree) + ' -----')
-=======
-            print('----- Approximating part ' + str(i) + ' to degree ' + str(approx_degree))
->>>>>>> origin/master
 
             directory = os.path.join(worker.output, 'bmf_partition', modulename, modulename)
             approximate(directory, approx_degree, worker, i)
         
         verilog_list.append(part_verilog)
     
-<<<<<<< HEAD
     # print('The verilog file list contains: ', verilog_list)
 
-=======
->>>>>>> origin/master
     # Synthesize and estimate chip area
     try:
         output_syn = os.path.join(worker.output, 'tmp', filename)
@@ -92,18 +78,11 @@ def evaluate_design(k_stream, worker, filename, display=True):
 
     return err, area, delay, power
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 def synth_design(input_file, output_file, lib_file, script, yosys):
 
     if lib_file is not None:
         yosys_command = 'read_verilog ' + input_file + '; ' + 'synth -flatten; opt; opt_clean -purge;  opt; opt_clean -purge; write_verilog -noattr ' +output_file + '.v; abc -liberty '+lib_file + ' -script ' + script + '; stat -liberty '+lib_file + '; write_verilog -noattr ' +output_file + '_syn.v;\n '
-<<<<<<< HEAD
         # print('Liberty is contained with command: ' + yosys_command)
-=======
->>>>>>> origin/master
         area = 0
         #line=subprocess.call(yosys+" -p \'"+ yosys_command+"\' > "+ output_file+".log", shell=True)
         with open(output_file+'.log', 'w') as f:
@@ -119,15 +98,9 @@ def synth_design(input_file, output_file, lib_file, script, yosys):
                 if 'Chip area' in line:
                     area = line.split()[-1]
                     break
-<<<<<<< HEAD
     else:
         yosys_command = 'read_verilog ' + input_file + '; ' + 'synth -flatten; opt; opt_clean -purge; opt; opt_clean -purge; write_verilog -noattr ' +output_file + '.v; abc -g NAND -script ' + script + '; write_verilog -noattr ' +output_file + '_syn.v;\n '
         # print('Liberty NOT contained with command: ' + yosys_command)
-=======
-
-    else:
-        yosys_command = 'read_verilog ' + input_file + '; ' + 'synth -flatten; opt; opt_clean -purge; opt; opt_clean -purge; write_verilog -noattr ' +output_file + '.v; abc -g NAND -script ' + script + '; write_verilog -noattr ' +output_file + '_syn.v;\n '
->>>>>>> origin/master
         area = 0
         #line=subprocess.call(yosys+" -p \'"+ yosys_command+"\' > "+ output_file+".log", shell=True)
         with open(output_file+'.log', 'w') as f:
@@ -148,11 +121,7 @@ def synth_design(input_file, output_file, lib_file, script, yosys):
             else:
                 area = return_list[-1]
 
-<<<<<<< HEAD
     # os.remove(output_file+'.log')
-=======
-    os.remove(output_file+'.log')
->>>>>>> origin/master
     return float(area)
 
 def inpout(fname):
@@ -183,10 +152,6 @@ def inpout(fname):
 
     return n_inputs, n_outputs
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 def gen_truth(fname, modulename):
     with open(fname+'.v') as file:
         f=open(fname+'_tb.v', "w+")
@@ -281,10 +246,6 @@ def gen_truth(fname, modulename):
     f.close()
     return n_inputs, n_outputs
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 def v2w_top(signal,  n):
 
 
@@ -295,10 +256,6 @@ def v2w_top(signal,  n):
         s = s+', '+signal+'{0:0{1}}'.format(i, digit_len)
     return s
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 def v2w(signal,  n):
     s=''
     for i in range(n-1, 0, -1):
@@ -306,17 +263,12 @@ def v2w(signal,  n):
     s=s+signal+'0'
     return s
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 def create_w(n, k, W, f1, modulename, formula_file, abc):    
     f1.write('module '+modulename+'_w'+str(k)+'('+v2w('in', n)+', '+ v2w('k', k)+');\n')
     f1.write('input '+v2w('in', n)+';\n')
     f1.write('output '+v2w('k', k)+';\n')
 
     for i in range(k-1, -1, -1):
-<<<<<<< HEAD
         f1.write('assign k'+str(k-i-1)+' =')
         
         truth = ""
@@ -324,14 +276,6 @@ def create_w(n, k, W, f1, modulename, formula_file, abc):
             truth= truth+str(W[j,i])
         # print(truth)
         
-=======
-        f1.write('assign k'+str(k-i-1)+' = ')
-        
-        truth=""
-        for j in range(2 ** n-1,-1,-1):
-            truth= truth+str(W[j,i])
-#        print(truth)
->>>>>>> origin/master
         if truth.find('1') != -1:
             script='read_truth -x '+truth+';bdd;order;write_verilog '+formula_file
             #os.system(abc+' -q '+'\''+script+'\'')
@@ -339,35 +283,21 @@ def create_w(n, k, W, f1, modulename, formula_file, abc):
             with open(formula_file, 'r') as file_handle:
                 for line in file_handle:
                     if 'assign' in line:
-<<<<<<< HEAD
                         formula = line
             # BUG: 2023-10-25: circuit_formula.v contains "assign F0="
             formula = formula.replace('assign F0 = ', '')
             # print(formula)
-=======
-                        formula=line
-            formula=formula.replace('assign F = ', '')
-#            print(formula)
->>>>>>> origin/master
             for c in range(n):
                 formula=formula.replace(chr(97+c)+ ';', 'in'+str(n-c-1)+';')
                 formula=formula.replace(chr(97+c)+ ' ', 'in'+str(n-c-1)+' ')
                 formula=formula.replace(chr(97+c)+ ')', 'in'+str(n-c-1)+')')
         else:
-<<<<<<< HEAD
             formula = '0;\n'
         # print(formula)
         f1.write(formula)
 
     f1.write('endmodule\n\n')
     print("Log: Compressor Created!")
-=======
-            formula='0;\n'
- #       print(formula)
-        f1.write(formula)
-
-    f1.write('endmodule\n\n')
->>>>>>> origin/master
 
 def create_h(m, k, H, f1, modulename):
     f1.write('module '+modulename+'_h'+str(k)+'('+v2w('k', k)+', '+ v2w('out', m)+');\n')
@@ -391,12 +321,7 @@ def create_h(m, k, H, f1, modulename):
         f1.write(';\n')
     
     f1.write('endmodule\n')
-<<<<<<< HEAD
     print("Log: Decompressor Created!")
-=======
-
-
->>>>>>> origin/master
 
 def create_wh(n, m, k, W, H, fname, modulename, output_dir, abc, formula_file):
     f1=open(fname+'_approx_k='+str(k)+'.v','w')
@@ -412,22 +337,14 @@ def create_wh(n, m, k, W, H, fname, modulename, output_dir, abc, formula_file):
     f1.close
 
 def approximate(inputfile, k, worker, i, output_name=None):
-<<<<<<< HEAD
     '''
         Approximate the circuit with BMF technique 
     '''
-=======
-
->>>>>>> origin/master
     modulename = worker.modulenames[i]
     if output_name is None:
         output_name = modulename
 
-<<<<<<< HEAD
     BMF(inputfile+'.truth', k, True)
-=======
-    BMF( inputfile+'.truth', k, True)
->>>>>>> origin/master
     W = np.loadtxt(inputfile + '.truth_w_' + str(k), dtype=int)
     H = np.loadtxt(inputfile + '.truth_h_' + str(k), dtype=int)
     formula_file = os.path.join(worker.output, 'bmf_partition', modulename, modulename+'_formula.v')
@@ -438,16 +355,9 @@ def approximate(inputfile, k, worker, i, output_name=None):
     create_wh(worker.input_list[i], worker.output_list[i], k, W, H, inputfile, output_name, worker.output, worker.path['abc'], formula_file)
 
 
-<<<<<<< HEAD
 def number_of_cell(input_file, yosys):
     '''
         Get number of yosys standard cells of input circuit
-=======
-
-def number_of_cell(input_file, yosys):
-    '''
-    Get number of yosys standard cells of input circuit
->>>>>>> origin/master
     '''
     yosys_command = 'read_verilog ' + input_file + '; ' \
             + 'synth -flatten; opt; opt_clean -purge; opt; opt_clean -purge; stat;\n'
@@ -464,18 +374,11 @@ def number_of_cell(input_file, yosys):
 
 def write_aiger(input_file, yosys, output_file, map_file):
     '''
-<<<<<<< HEAD
         Convert verilog to aig file
     '''
     yosys_command = 'read_verilog ' + input_file + '; synth -flatten; opt; opt_clean -purge; abc -g NAND; aigmap; opt; opt_clean -purge; write_aiger -vmap '\
             + map_file + ' ' + output_file + ';'
     print(yosys_command)
-=======
-    Convert verilog to aig file
-    '''
-    yosys_command = 'read_verilog ' + input_file + '; synth -flatten; opt; opt_clean -purge; abc -g NAND; aigmap; opt; opt_clean -purge; write_aiger -vmap '\
-            + map_file + ' ' + output_file + ';'
->>>>>>> origin/master
     subprocess.call([yosys, '-p', yosys_command], stdout=subprocess.DEVNULL)
     # Parse map file and return dict
     # input_map = {}
@@ -497,10 +400,6 @@ def write_aiger(input_file, yosys, output_file, map_file):
             # {i: org_output_map[output_map[i]] for i in range(len(output_map))}
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 # def inpout_map(fname):
 #     input_map = {}
 #     output_map = {}
@@ -534,10 +433,7 @@ def write_aiger(input_file, yosys, output_file, map_file):
 #     return input_map, output_map
 
 def get_delay(sta, script, liberty, input_file, modulename, output_file):
-<<<<<<< HEAD
     # print("----- In utils/get_delay() -----")
-=======
->>>>>>> origin/master
     with open(script, 'w') as f:
         f.write('read_liberty {}\nread_verilog {}\nlink_design {}\n'.format(liberty, input_file, modulename))
         f.write('create_clock -name clk -period 1\n')
@@ -562,31 +458,21 @@ def get_delay(sta, script, liberty, input_file, modulename, output_file):
 
 
 def get_power(sta, script, liberty, input_file, modulename, output_file, delay):
-<<<<<<< HEAD
     # print("----- In utils/get_power() -----")
-=======
->>>>>>> origin/master
     with open(script, 'w') as f:
         f.write('read_liberty {}\nread_verilog {}\nlink_design {}\n'.format(liberty, input_file, modulename))
         f.write('create_clock -name clk -period {}\n'.format(delay))
         f.write('set_input_delay -clock clk 0 [all_inputs]\n')
         f.write('set_output_delay -clock clk 0 [all_outputs]\n')
         f.write('report_checks\n')
-<<<<<<< HEAD
         f.write('report_power -digits 12\n')
-=======
-        f.write('report_power - digits 12\n')
->>>>>>> origin/master
         f.write('exit')
 
     with open(output_file, 'w') as f:
         subprocess.call([sta, script], stdout=f)
 
-<<<<<<< HEAD
     # print("-- STA call is finished --")
 
-=======
->>>>>>> origin/master
     with open(output_file) as f:
         line = f.readline()
         while line:
@@ -598,14 +484,8 @@ def get_power(sta, script, liberty, input_file, modulename, output_file, delay):
 
     return power * 1e6
 
-<<<<<<< HEAD
 def create_wrapper(inp, out, top, vmap, worker):
 
-=======
-
-
-def create_wrapper(inp, out, top, vmap, worker):
->>>>>>> origin/master
     tmp = os.path.join(worker.output, 'tmp.v')
     yosys_command = 'read_verilog ' + inp + '; synth -flatten; opt; opt_clean;  write_verilog ' + tmp + ';\n'
     subprocess.call([worker.path['yosys'], '-p', yosys_command], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
@@ -616,7 +496,6 @@ def create_wrapper(inp, out, top, vmap, worker):
     tmp_file = open(tmp)
     isVector = {}
     line = tmp_file.readline()
-<<<<<<< HEAD
 
     # BUG: 2023-11-8, the author did not consider the condition that IO could not listed in one line
     while line:
@@ -624,12 +503,6 @@ def create_wrapper(inp, out, top, vmap, worker):
 
         # 2023-11-8: add the condition of ',' for the IO are not listed in one line
         if len(tokens) > 0 and (tokens[0] == 'module' or tokens[0] == ','):
-=======
-    while line:
-        tokens = line.strip().strip(';').strip().split()
-
-        if len(tokens) > 0 and tokens[0] == 'module':
->>>>>>> origin/master
             out_file.write(line)
 
         if len(tokens) > 0 and ( tokens[0] == 'input' or tokens[0] == 'output' ):
@@ -641,11 +514,6 @@ def create_wrapper(inp, out, top, vmap, worker):
 
         line = tmp_file.readline()
     tmp_file.close()
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> origin/master
     # Prepare list of arguments
     arg_list = []
     input_dict = {}
@@ -749,7 +617,6 @@ def create_wrapper(inp, out, top, vmap, worker):
     top_file.close()
 
     out_file.close()
-<<<<<<< HEAD
 
     try:
         os.remove(top)
@@ -759,15 +626,6 @@ def create_wrapper(inp, out, top, vmap, worker):
     shutil.move(out, top)
     os.remove(os.path.join(worker.output, 'tmp.v'))
 
-=======
-    
-    os.remove(top)
-    shutil.move(out, top)
-
-    os.remove(os.path.join(worker.output, 'tmp.v'))
-
-
->>>>>>> origin/master
 def create_wrapper_single(inp, out, worker):
 
     tmp = os.path.join(worker.output, 'tmp.v')
@@ -820,19 +678,7 @@ def create_wrapper_single(inp, out, worker):
     out_file.write('endmodule\n')
 
     out_file.close()
-<<<<<<< HEAD
-    # os.remove(tmp)
-=======
     os.remove(tmp)
-
-
-
-
-
-
-
-
->>>>>>> origin/master
 
 def module_info(fname, yosys_path):
 
