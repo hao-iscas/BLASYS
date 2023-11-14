@@ -269,15 +269,6 @@ class Blasys(Cmd):
     def help_metric(self):
         print('[Usage] metric ERROR_METRIC\n')
 
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
->>>>>>> origin/master
     def do_partition(self, args):
         if self.partitioned:
             print('[Error] Ciruit already partitioned.\n')
@@ -307,26 +298,11 @@ class Blasys(Cmd):
         self.partitioned = True
         print('\n')
 
-<<<<<<< HEAD
     def help_partition(self):
         print('[Usage] partition [NUMBER_OF_PARTITIONS]\n')
 
     def do_blasys(self, args):
         print('CMD: In do_blasys')
-=======
-
-    def help_partition(self):
-        print('[Usage] partition [NUMBER_OF_PARTITIONS]\n')
-
-    
-
-
-
-
-
-
-    def do_blasys(self, args):
->>>>>>> origin/master
         if self.testbench is None:
             print('[Error] No testbench found. Please first run read_testbench.\n')
             return
@@ -400,11 +376,7 @@ class Blasys(Cmd):
             args_list.pop(idx)
         else:
             stepsize = 1
-<<<<<<< HEAD
         
-=======
-
->>>>>>> origin/master
         # Call greedy_opt
         self.optimizer.greedy_opt(self.parallel, self.cpu, stepsize, threshold_list, track=track)
 
@@ -675,16 +647,7 @@ class Blasys(Cmd):
             print('********** Circuit Delay **********')
             print('Original input: {}'.format(org_delay))
             print('Approx design:  {}'.format(delay))
-<<<<<<< HEAD
             print('\n')       
-=======
-            print('\n')
-
-
-
-
-        
->>>>>>> origin/master
 
     def help_evaluate(self):
         print('[Usage] evaluate VERILOG_FILE')

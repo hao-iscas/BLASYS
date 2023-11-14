@@ -70,11 +70,6 @@ class GreedyWorker():
                     break
                 line = file.readline()
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> origin/master
     def create_output_dir(self, output):
         
         if output is None:
@@ -101,29 +96,17 @@ class GreedyWorker():
             # file.write('strash;ifraig;dc2;fraig;rewrite;refactor;resub;rewrite;refactor;resub;rewrite;rewrite -z;rewrite -z;rewrite -z;')
             # file.write('balance;refactor -z;refactor -N 11;resub -K 10;resub -K 12;resub -K 14;resub -K 16;refactor;balance;map -a')
 
-<<<<<<< HEAD
     def convert2aig(self):
         '''
             Parsing the input verilog into the aig format
         '''
-=======
-
-
-    def convert2aig(self):
->>>>>>> origin/master
         print('Parsing input verilog into aig format ...')
         self.aig = os.path.join(self.output, self.modulename + '.aig')
         mapping = os.path.join(self.output, self.modulename + '.map')
         write_aiger(self.input, self.path['yosys'], self.aig, mapping)
 
-<<<<<<< HEAD
     def blasys(self):
         print('----- In greedyWorker.blasys() -----')
-=======
-
-
-    def blasys(self):
->>>>>>> origin/master
         # inp, out = inpout(self.input)
         info = module_info(self.input, self.path['yosys'])
         inp, out = info[3], info[5]
@@ -137,11 +120,7 @@ class GreedyWorker():
         os.mkdir(out_dir)
         src_dir = os.path.join(self.output, self.modulename)
         truth_dir = os.path.join(out_dir, self.modulename)
-<<<<<<< HEAD
         shutil.copyfile(src_dir + '.truth', truth_dir + '.truth')
-=======
-        shutil.copyfile(src_dir+'.truth', truth_dir+'.truth')
->>>>>>> origin/master
         
         if self.sta:
             sta_script = os.path.join(self.output, 'sta.script')
@@ -153,11 +132,7 @@ class GreedyWorker():
             self.delay = float('nan')
             power = float('nan')
 
-<<<<<<< HEAD
         # store the information of original circuit
-=======
-
->>>>>>> origin/master
         f = open(os.path.join(self.output, 'result', 'iteration.csv'), 'a')
         f.write('{},{},{},{},{},{}\n'.format('Iter','Metric', 'Area(um^2)', 'Power(uW)', 'Delay(ns)', 'Filename') )
         f.write('{},{:<.6f},{:.2f},{:.6f},{:.6f},{}\n'.format('Org', 0, self.initial_area, power, self.delay, 'Org') )
@@ -176,10 +151,7 @@ class GreedyWorker():
         for k in range(out-1, 0,-1):
             # Approximate
             approximate(truth_dir, k, self, 0, 'top')
-<<<<<<< HEAD
             # BUG: 2023-10-25: Seems like some problems in generating circuit_approx_k=*.v => Seem fixed!
-=======
->>>>>>> origin/master
             in_file = os.path.join(out_dir, self.modulename+'_approx_k='+str(k)+'.v')
             filename = self.modulename+'_k='+str(k)
             out_file = os.path.join(self.output, 'result', filename)
@@ -200,11 +172,8 @@ class GreedyWorker():
                 print('Factorization degree {}, Metric {:.6%}, Area {:.2f}'.format(k, err, area))
             f.write('{},{:.6f},{:.2f},{:.6f},{:.6f},{}\n'.format(k, err, area, power_iter, delay_iter, filename) )
             d.write('{},{:.6f},{:.2f},{:.6f},{:.6f}\n'.format(filename, err, area, power_iter, delay_iter) )
-<<<<<<< HEAD
         # print(area_list)
 
-=======
->>>>>>> origin/master
         self.plot(err_list, area_list)
         f.close()
         d.close()
@@ -219,17 +188,10 @@ class GreedyWorker():
         shutil.rmtree(os.path.join(self.output, 'truthtable'))
         shutil.rmtree(os.path.join(self.output, 'log'))
 
-<<<<<<< HEAD
     def evaluate_initial(self):
         '''
             Evaluate the original circuit infos: design area, etc
         '''
-=======
-
-
-
-    def evaluate_initial(self):
->>>>>>> origin/master
         print('Simulating truth table on input design...')
         subprocess.call([self.path['iverilog'], '-o', self.modulename+'.iv', self.input, self.testbench ])
         output_truth = os.path.join(self.output, self.modulename+'.truth')
@@ -244,11 +206,6 @@ class GreedyWorker():
         self.initial_area = input_area
         self.area_list.append(self.initial_area)
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> origin/master
     def partitioning(self, num_parts):
 
         # Partitioning circuit
@@ -267,10 +224,7 @@ class GreedyWorker():
         self.truthtable_for_parts()
 
     def recursive_partitioning(self, num_parts=None):
-<<<<<<< HEAD
         print("--- In greedyWorker.recursive_partitioning() ---")
-=======
->>>>>>> origin/master
         self.modulenames = []
 
         if num_parts is None:
@@ -282,12 +236,9 @@ class GreedyWorker():
                 'partitioning ' + str(num_parts) + ' -c '+ self.path['part_config'] +'; ' \
                 'get_all_partitions ' + part_dir
         
-<<<<<<< HEAD
         # print(part_dir)
         # print(lsoracle_command)
         
-=======
->>>>>>> origin/master
         log_partition = os.path.join(self.output, 'log', 'lsoracle.log')
         with open(log_partition, 'w') as file_handler:
             subprocess.call([self.path['lsoracle'], '-c', lsoracle_command], stderr=subprocess.STDOUT, stdout=file_handler)
@@ -303,14 +254,10 @@ class GreedyWorker():
                 continue
 
             inp, out = inpout(mod_path)
-<<<<<<< HEAD
             print(mod_path + ", Inp: " + str(inp) + ", Out: " + str(out))
 
             if inp > 16:
                 # 2023-11-6 Point: Why when inp > 16, it needs to partition into 3 sub-circuits? => to avoid the sub-circuit partitioned is still to large?
-=======
-            if inp > 16:
->>>>>>> origin/master
                 lsoracle_command = 'read_verilog ' + mod_path + '; ' \
                         'partitioning 3 -c ' + self.path['part_config'] + '; ' \
                         'get_all_partitions ' + part_dir
@@ -327,11 +274,7 @@ class GreedyWorker():
 
         print('Number of partitions', len(self.modulenames))
 
-<<<<<<< HEAD
         # 2023-11-6: generate the truth table for each partitions.
-=======
-
->>>>>>> origin/master
         self.truthtable_for_parts()
 
         # Rewrite top-level
@@ -344,17 +287,10 @@ class GreedyWorker():
         # os.remove(self.aig)
         # os.remove(os.path.join(self.output, self.modulename + '.map'))
 
-<<<<<<< HEAD
     def truthtable_for_parts(self):
         '''
             Generate truth table for each partitions => in bmf_partition folders
         '''
-=======
-     
-
-    def truthtable_for_parts(self):
-        # Generate truth table for each partitions
->>>>>>> origin/master
         self.input_list = []
         self.output_list = []
         #for i in range(num_parts):
@@ -390,10 +326,7 @@ class GreedyWorker():
 
 
     def greedy_opt(self, parallel, cpu_count, step_size = 1, threshold=[1000000.], track=3, accel=0):
-<<<<<<< HEAD
         print('----- In utils/greedyWorker.greedy_opt() -----')
-=======
->>>>>>> origin/master
         threshold.sort()
         while True:
             if self.next_iter(parallel, cpu_count, step_size, threshold, track=track, accel=accel) == -1:
@@ -405,39 +338,23 @@ class GreedyWorker():
         if self.iter == 0:
             print('==================== Starting Approximation by Greedy Search  ====================')
             with open(os.path.join(self.output, 'result', 'result.txt'), 'w') as f:
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
                 if self.sta:
                     sta_script = os.path.join(self.output, 'sta.script')
                     sta_output = os.path.join(self.output, 'sta.out')
                     synth_input = os.path.join(self.output, self.modulename+'_syn.v')
                     self.delay = get_delay(self.path['OpenSTA'], sta_script, self.library, synth_input, self.modulename, sta_output)
                     power = get_power(self.path['OpenSTA'], sta_script, self.library, synth_input, self.modulename, sta_output, self.delay) 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
                     os.remove(sta_script)
                     os.remove(sta_output)
                 else:
                     self.delay = float('nan')
                     power = float('nan')
-<<<<<<< HEAD
                 f.write('{:<10}{:<15}{:<15}{:<15}\n'.format('Metric', 'Area(um^2)', 'Power(uW)', 'Delay(ns)') )
                 f.write('{:<10.2f}{:<15.2f}{:<15.6f}{:<15.6f}\n'.format(0, self.initial_area, power, self.delay) )
             
             self.power_list.append(power)
             self.delay_list.append(self.delay)
             
-=======
-
-                f.write('{:<10}{:<15}{:<15}{:<15}\n'.format('Metric', 'Area(um^2)', 'Power(uW)', 'Delay(ns)') )
-                f.write('{:<10.2f}{:<15.2f}{:<15.6f}{:<15.6f}\n'.format(0, self.initial_area, power, self.delay) )
-            self.power_list.append(power)
-            self.delay_list.append(self.delay)
->>>>>>> origin/master
             with open(os.path.join(self.output, 'result', 'iteration.csv'), 'a') as f:
                 f.write('{},{},{},{},{},{}\n'.format('Iter','Metric', 'Area(um^2)', 'Power(uW)', 'Delay(ns)', 'Filename') )
                 f.write('{},{:.6f},{:.2f},{:.6f},{:.6f},{}\n'.format('Org', 0, self.initial_area, power, self.delay,'Org') )
@@ -483,19 +400,11 @@ class GreedyWorker():
 
 
         time_used = after - before
-<<<<<<< HEAD
         print('--------------- Finishing Iteration ' + str(self.iter) + '---------------')
         part_idx = list(np.nonzero(np.subtract(next_stream, self.curr_stream)))
         print('Res: Partition', part_idx[0], 'being approximated')
 
         msg = 'Res: Approximated error: {:.6f}%\tArea percentage: {:.6f}%\tTime used: {:.6f} sec\n'.format(100*err[rank[0]], 100 * area[rank[0]] / self.initial_area, time_used)
-=======
-        print('--------------- Finishing Iteration' + str(self.iter) + '---------------')
-        part_idx = list(np.nonzero(np.subtract(next_stream, self.curr_stream)))
-        print('Partition', part_idx, 'being approximated')
-
-        msg = 'Approximated error: {:.6f}%\tArea percentage: {:.6f}%\tTime used: {:.6f} sec\n'.format(100*err[rank[0]], 100 * area[rank[0]] / self.initial_area, time_used)
->>>>>>> origin/master
         print(msg)
         with open(os.path.join(self.output, 'log', 'blasys.log'), 'a') as log_file:
             log_file.write(str(next_stream))
@@ -525,11 +434,7 @@ class GreedyWorker():
 
         if err[rank[0]] >= threshold[0]+0.005:
             ts = threshold.pop(0)
-<<<<<<< HEAD
             print('Log: Reach threshold on', ts)
-=======
-            print('Reach threshold on', ts)
->>>>>>> origin/master
             a = np.array(self.area_list)
             e = np.array(self.error_list)
             a[e > ts] = np.inf
@@ -550,11 +455,7 @@ class GreedyWorker():
                 f.write('{:<10.6f}{:<15.2f}{:<15.6f}{:<15.6f}\n'.format(self.error_list[idx], self.area_list[idx], self.power_list[idx], self.delay_list[idx]) )
 
         if len(threshold) == 0: 
-<<<<<<< HEAD
             print('Log: Reach error threshold. Exit approximation.')
-=======
-            print('Reach error threshold. Exit approximation.')
->>>>>>> origin/master
             return -1
         
         
@@ -563,33 +464,20 @@ class GreedyWorker():
         return 0
 
 
-<<<<<<< HEAD
     def evaluate_iter(self, curr_k_streams, num_iter, step_size, parallel, threshold, least_error, cpu_count, accel):   
         print("Log: In greedyWorker.evaluate_iter()")
 
-=======
-    def evaluate_iter(self, curr_k_streams, num_iter, step_size, parallel, threshold, least_error, cpu_count, accel):
-    
->>>>>>> origin/master
         k_lists = []
         err_list = []
         area_list = []
         delay_list = []
         power_list = []
         name_list = []
-<<<<<<< HEAD
 
         changed = []
 
         for num_track, curr_k_stream in enumerate(curr_k_streams):
             print('========== TRACK {} =========='.format(num_track))
-=======
-        
-        changed = []
-
-        for num_track, curr_k_stream in enumerate(curr_k_streams):
-            print('==========TRACK {} =========='.format(num_track))
->>>>>>> origin/master
             # Create a set of candidate k_streams
             k_lists_tmp = []
             for i in range(len(curr_k_stream)):
@@ -608,11 +496,8 @@ class GreedyWorker():
                 self.explored_streams.append(new_k_stream)
                 
                 changed.append(i)
-<<<<<<< HEAD
             
             # print(k_lists_tmp)
-=======
->>>>>>> origin/master
 
             # Full mode
             if accel == 0 or accel == 2: 
@@ -636,11 +521,7 @@ class GreedyWorker():
                 # Sequential mode
                     for i in range(len(k_lists_tmp)):
                         # Evaluate each list
-<<<<<<< HEAD
                         print('======== Design number ' + str(i) + ' ========')
-=======
-                        print('======== Design number ' + str(i))
->>>>>>> origin/master
                         k_stream = k_lists_tmp[i]
                         res = evaluate_design(k_stream, self, '{}_{}-{}-{}'.format(self.modulename, num_iter, num_track, i))
                         if res is None:
