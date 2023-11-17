@@ -21,13 +21,13 @@ test/hypergraph.txt
 test/*_output
 test/*_script
 
-<<<<<<< HEAD
 # Hao Hu: 2023-11-8 => scripts and results of circuits
 circuit_outputs/*
-scripts/*
+# scripts/*
 
 # Hao Hu: 2023-11-8 => some extensions
 *.history
 .python-version
-=======
->>>>>>> origin/master
+
+# Hao Hu: 2023-11-16 => the log of outputs
+# log_outputs/*

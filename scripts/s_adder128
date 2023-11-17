@@ -1,0 +1,8 @@
+output_to circuit_outputs/adder128
+read_verilog test/adder.v
+read_testbench test/adder_tb.v
+metric HD
+read_liberty config/ssxlib013.lib
+sta on
+partition 20
+blasys -ts 0.1,0.15 -tr 3

@@ -1,0 +1,188 @@
+/----------------------------------------------------------------------------\
+|                                                                            |
+|  BLASYS -- Approximate Logic Synthesis Using Boolean Matrix Factorization  |
+|  Version: 0.5-beta                                                       |
+|                                                                            |
+|  Copyright (C) 2019  SCALE Lab, Brown University                           |
+|                                                                            |
+|  Permission to use, copy, modify, and/or distribute this software for any  |
+|  purpose with or without fee is hereby granted, provided that the above    |
+|  copyright notice and this permission notice appear in all copies.         |
+|                                                                            |
+|  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+|  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+|  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+|  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+|  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+|  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+|  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+|                                                                            |
+\----------------------------------------------------------------------------/
+[0] Run BLASYS command: output_to circuit_outputs/add8u
+
+Set output directory to circuit_outputs/add8u.
+
+[1] Run BLASYS command: read_verilog test/add8u_0FP.v
+
+Checking software dependency ...
+Module Name add8u_0FP, Inputs: 16, Outputs: 9
+Successfully loaded input file and created optimizer.
+
+Create output directory...
+
+
+[2] Run BLASYS command: read_testbench test/add8u_0FP_tb.v
+
+Successfully read testbench file.
+
+[3] Run BLASYS command: metric HD
+
+Successfully set error metric as HD
+
+[4] Run BLASYS command: read_liberty config/ssxlib013.lib
+
+Successfully loaded liberty file config/ssxlib013.lib.
+
+[5] Run BLASYS command: sta on
+
+Turn on OpenSTA. Evaluate power and delay.
+
+[6] Run BLASYS command: partition 5
+
+Parsing input verilog into aig format ...
+read_verilog test/add8u_0FP.v; synth -flatten; opt; opt_clean -purge; abc -g NAND; aigmap; opt; opt_clean -purge; write_aiger -vmap circuit_outputs/add8u/add8u_0FP.map circuit_outputs/add8u/add8u_0FP.aig;
+--- In greedyWorker.recursive_partitioning() ---
+Partitioning input circuit...
+circuit_outputs/add8u/partition/add8u_0FP_4.v, Inp: 3, Out: 2
+circuit_outputs/add8u/partition/add8u_0FP_3.v, Inp: 5, Out: 3
+circuit_outputs/add8u/partition/add8u_0FP_2.v, Inp: 4, Out: 3
+circuit_outputs/add8u/partition/add8u_0FP_1.v, Inp: 3, Out: 3
+circuit_outputs/add8u/partition/add8u_0FP_0.v, Inp: 6, Out: 3
+Number of partitions 5
+Create testbench for partition 0
+Generate truth table for partition 0
+Create testbench for partition 1
+Generate truth table for partition 1
+Create testbench for partition 2
+Generate truth table for partition 2
+Create testbench for partition 3
+Generate truth table for partition 3
+Create testbench for partition 4
+Generate truth table for partition 4
+
+
+[7] Run BLASYS command: blasys -ts 0.01,0.015 -tr 3
+CMD: In do_blasys
+Simulating truth table on input design...
+Synthesizing input design with original partitions...
+Original design area  245.0
+----- In utils/greedyWorker.greedy_opt() -----
+==================== Starting Approximation by Greedy Search  ====================
+Log: Current stream of factorization degree:  [2, 3, 3, 3, 3]
+--------------- Iteration 0 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+======== Design number 0 ========
+Log: In utils.evaluate_design()
+Evaluating Design: [1, 3, 3, 3, 3]
+Log: ----- Approximating part 0 to degree 1 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.123047	Circuit area: 215.000000	Circuit delay: 670.227961	Power consumption: 96.960670
+======== Design number 1 ========
+Log: In utils.evaluate_design()
+Evaluating Design: [2, 2, 3, 3, 3]
+Log: ----- Approximating part 1 to degree 2 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.159722	Circuit area: 230.000000	Circuit delay: 1262.864253	Power consumption: 108.894266
+======== Design number 2 ========
+Log: In utils.evaluate_design()
+Evaluating Design: [2, 3, 2, 3, 3]
+Log: ----- Approximating part 2 to degree 2 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.179905	Circuit area: 226.000000	Circuit delay: 1280.856196	Power consumption: 102.071215
+======== Design number 3 ========
+Log: In utils.evaluate_design()
+Evaluating Design: [2, 3, 3, 2, 3]
+Log: ----- Approximating part 3 to degree 2 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.076389	Circuit area: 261.000000	Circuit delay: 1361.204341	Power consumption: 98.253215
+======== Design number 4 ========
+Log: In utils.evaluate_design()
+Evaluating Design: [2, 3, 3, 3, 2]
+Log: ----- Approximating part 4 to degree 2 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.194444	Circuit area: 250.000000	Circuit delay: 1313.467891	Power consumption: 119.307457
+--------------- Finishing Iteration 0---------------
+Res: Partition [0] being approximated
+Res: Approximated error: 12.304688%	Area percentage: 87.755102%	Time used: 6.761147 sec
+
+Log: Reach threshold on 0.01
+Log: Current stream of factorization degree:  [1, 3, 3, 3, 3]
+[2, 3, 2, 3, 3]
+[2, 2, 3, 3, 3]
+--------------- Iteration 1 ---------------
+Log: In greedyWorker.evaluate_iter()
+========== TRACK 0 ==========
+======== Design number 0 ========
+Log: In utils.evaluate_design()
+Evaluating Design: [1, 2, 3, 3, 3]
+Simulation error: 0.222222	Circuit area: 204.000000	Circuit delay: 636.196772	Power consumption: 99.527948
+======== Design number 1 ========
+Log: In utils.evaluate_design()
+Evaluating Design: [1, 3, 2, 3, 3]
+Simulation error: 0.261936	Circuit area: 201.000000	Circuit delay: 670.227961	Power consumption: 97.165153
+======== Design number 2 ========
+Log: In utils.evaluate_design()
+Evaluating Design: [1, 3, 3, 2, 3]
+Simulation error: 0.191623	Circuit area: 229.000000	Circuit delay: 934.017207	Power consumption: 67.655856
+======== Design number 3 ========
+Log: In utils.evaluate_design()
+Evaluating Design: [1, 3, 3, 3, 2]
+Simulation error: 0.301866	Circuit area: 212.000000	Circuit delay: 900.892329	Power consumption: 85.287211
+========== TRACK 1 ==========
+======== Design number 0 ========
+Log: In utils.evaluate_design()
+Evaluating Design: [2, 2, 2, 3, 3]
+Simulation error: 0.319444	Circuit area: 218.000000	Circuit delay: 1235.031489	Power consumption: 109.588938
+======== Design number 1 ========
+Log: In utils.evaluate_design()
+Evaluating Design: [2, 3, 1, 3, 3]
+Log: ----- Approximating part 2 to degree 1 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.193793	Circuit area: 217.000000	Circuit delay: 1260.063716	Power consumption: 117.597883
+======== Design number 2 ========
+Log: In utils.evaluate_design()
+Evaluating Design: [2, 3, 2, 2, 3]
+Simulation error: 0.253689	Circuit area: 248.000000	Circuit delay: 1281.563472	Power consumption: 98.528508
+======== Design number 3 ========
+Log: In utils.evaluate_design()
+Evaluating Design: [2, 3, 2, 3, 2]
+Simulation error: 0.369141	Circuit area: 232.000000	Circuit delay: 1248.826533	Power consumption: 120.184486
+========== TRACK 2 ==========
+======== Design number 0 ========
+Log: In utils.evaluate_design()
+Evaluating Design: [2, 1, 3, 3, 3]
+Log: ----- Approximating part 1 to degree 1 -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Simulation error: 0.162977	Circuit area: 174.000000	Circuit delay: 547.985530	Power consumption: 73.512951
+======== Design number 1 ========
+Log: In utils.evaluate_design()
+Evaluating Design: [2, 2, 3, 2, 3]
+Simulation error: 0.208333	Circuit area: 242.000000	Circuit delay: 1261.460444	Power consumption: 117.925621
+======== Design number 2 ========
+Log: In utils.evaluate_design()
+Evaluating Design: [2, 2, 3, 3, 2]
+Simulation error: 0.298611	Circuit area: 234.000000	Circuit delay: 1202.745967	Power consumption: 134.974049
+--------------- Finishing Iteration 1---------------
+Res: Partition [1] being approximated
+Res: Approximated error: 16.297743%	Area percentage: 71.020408%	Time used: 13.656754 sec
+
+Log: Reach threshold on 0.015
+Log: Reach error threshold. Exit approximation.

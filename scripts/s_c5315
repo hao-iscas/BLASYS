@@ -1,0 +1,9 @@
+output_to circuit_outputs/c5315
+read_verilog test/c5315.v
+read_testbench test/c5315_tb.v
+parallel on -cpu 4
+metric HD
+read_liberty config/ssxlib013.lib
+sta on
+partition 10
+blasys -ts 0.01,0.02 -tr 3

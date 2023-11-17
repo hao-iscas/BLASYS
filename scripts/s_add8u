@@ -1,0 +1,8 @@
+output_to circuit_outputs/add8u
+read_verilog test/add8u_0FP.v
+read_testbench test/add8u_0FP_tb.v
+metric HD
+read_liberty config/ssxlib013.lib
+sta on
+partition 5
+blasys -ts 0.01,0.015 -tr 3
