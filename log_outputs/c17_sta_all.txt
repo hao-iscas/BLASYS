@@ -1,0 +1,60 @@
+/----------------------------------------------------------------------------\
+|                                                                            |
+|  BLASYS -- Approximate Logic Synthesis Using Boolean Matrix Factorization  |
+|  Version: 0.5-beta                                                       |
+|                                                                            |
+|  Copyright (C) 2019  SCALE Lab, Brown University                           |
+|                                                                            |
+|  Permission to use, copy, modify, and/or distribute this software for any  |
+|  purpose with or without fee is hereby granted, provided that the above    |
+|  copyright notice and this permission notice appear in all copies.         |
+|                                                                            |
+|  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+|  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+|  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+|  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+|  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+|  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+|  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+|                                                                            |
+\----------------------------------------------------------------------------/
+[0] Run BLASYS command: output_to circuit_outputs/c17
+
+Set output directory to circuit_outputs/c17.
+
+[1] Run BLASYS command: read_verilog test/c17.v
+
+Checking software dependency ...
+Module Name c17, Inputs: 5, Outputs: 2
+Successfully loaded input file and created optimizer.
+
+Create output directory...
+
+
+[2] Run BLASYS command: read_testbench test/c17_tb.v
+
+Successfully read testbench file.
+
+[3] Run BLASYS command: metric HD
+
+Successfully set error metric as HD
+
+[4] Run BLASYS command: read_liberty config/ssxlib013.lib
+
+Successfully loaded liberty file config/ssxlib013.lib.
+
+[5] Run BLASYS command: sta on
+
+Turn on OpenSTA. Evaluate power and delay.
+
+[6] Run BLASYS command: blasys -ts 0.01,0.02 -tr 3
+CMD: In do_blasys
+Simulating truth table on input design...
+Synthesizing input design with original partitions...
+Original design area  22.0
+----- In greedyWorker.blasys() -----
+Log: Compressor Created!
+Log: Decompressor Created!
+Factorization degree 1, Metric 15.625000%, Area 12.00, Power 2.8156, Delay 171.6634
+Finish.
+
