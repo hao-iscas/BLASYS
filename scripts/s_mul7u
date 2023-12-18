@@ -1,9 +1,0 @@
-output_to circuit_outputs/mul7u
-read_verilog test/mul7u_01L.v
-read_testbench test/mul7u_01L_tb.v
-metric MAE
-parallel on -cpu 8
-read_liberty config/ssxlib013.lib
-sta on
-partition 10
-blasys -ts 0.01,0.02 -tr 3

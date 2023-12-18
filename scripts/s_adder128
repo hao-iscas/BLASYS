@@ -4,5 +4,5 @@ read_testbench test/adder_tb.v
 metric HD
 read_liberty config/ssxlib013.lib
 sta on
-partition 20
+partition 10
 blasys -ts 0.1,0.15 -tr 3

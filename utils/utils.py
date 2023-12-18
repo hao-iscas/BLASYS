@@ -247,8 +247,6 @@ def gen_truth(fname, modulename):
     return n_inputs, n_outputs
 
 def v2w_top(signal,  n):
-
-
     digit_len = len(str(n))
     s=''
     s=s+signal+'{0:0{1}}'.format(0, digit_len)
@@ -340,6 +338,10 @@ def approximate(inputfile, k, worker, i, output_name=None):
     '''
         Approximate the circuit with BMF technique 
     '''
+    # print(v2w_top('pi', 20))
+    # print(v2w('pi', 20))
+    # time.sleep(10)
+
     modulename = worker.modulenames[i]
     if output_name is None:
         output_name = modulename
@@ -374,11 +376,17 @@ def number_of_cell(input_file, yosys):
 def write_aiger(input_file, yosys, output_file, map_file):
     '''
         Convert verilog to aig file
+        BUG: 2023-12-12: When using c5315.v (9-bit ALU), the yosys is crashed in the command 'write_aiger'
+        => The error message is throwing 'std::out_of_range'
     '''
     yosys_command = 'read_verilog ' + input_file + '; synth -flatten; opt; opt_clean -purge; abc -g NAND; aigmap; opt; opt_clean -purge; write_aiger -vmap '\
-            + map_file + ' ' + output_file + ';'
+        + map_file + ' ' + output_file + ';'
     print(yosys_command)
-    subprocess.call([yosys, '-p', yosys_command], stdout=subprocess.DEVNULL)
+    with open(output_file+'.log', 'w') as f:
+        line = subprocess.call([yosys, '-p', yosys_command], stdout=f, stderr=subprocess.STDOUT)
+    
+    # subprocess.call([yosys, '-p', yosys_command], stdout=subprocess.DEVNULL)
+
     # Parse map file and return dict
     # input_map = {}
     # output_map = {}
