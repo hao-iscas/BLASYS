@@ -382,10 +382,9 @@ def write_aiger(input_file, yosys, output_file, map_file):
     yosys_command = 'read_verilog ' + input_file + '; synth -flatten; opt; opt_clean -purge; abc -g NAND; aigmap; opt; opt_clean -purge; write_aiger -vmap '\
         + map_file + ' ' + output_file + ';'
     print(yosys_command)
-    with open(output_file+'.log', 'w') as f:
-        line = subprocess.call([yosys, '-p', yosys_command], stdout=f, stderr=subprocess.STDOUT)
-    
-    # subprocess.call([yosys, '-p', yosys_command], stdout=subprocess.DEVNULL)
+    # with open(output_file+'.log', 'w') as f:
+        # line = subprocess.call([yosys, '-p', yosys_command], stdout=f, stderr=subprocess.STDOUT)
+    subprocess.call([yosys, '-p', yosys_command], stdout=subprocess.DEVNULL)
 
     # Parse map file and return dict
     # input_map = {}
