@@ -193,7 +193,10 @@ class GreedyWorker():
             Evaluate the original circuit infos: design area, etc
         '''
         print('Simulating truth table on input design...')
-        subprocess.call([self.path['iverilog'], '-o', self.modulename+'.iv', self.input, self.testbench ])
+
+        # print(self.testbench)
+        subprocess.call([self.path['iverilog'], '-o', self.modulename+'.iv ', self.input,  self.testbench])
+
         output_truth = os.path.join(self.output, self.modulename+'.truth')
         with open(output_truth, 'w') as f:
             subprocess.call([self.path['vvp'], self.modulename+'.iv'], stdout=f)
@@ -318,7 +321,7 @@ class GreedyWorker():
             subprocess.call([self.path['iverilog'], '-o', file_path+'.iv', file_path+'.v', file_path+'_tb.v'])
             with open( os.path.join(part_output_dir, modulename + '.truth'), 'w') as f:
                 subprocess.call([self.path['vvp'], file_path+'.iv'], stdout=f)
-                os.remove(file_path+'.iv')
+            os.remove(file_path+'.iv')
 
         self.curr_stream = self.output_list.copy()
         self.curr_streams = [self.output_list.copy()]

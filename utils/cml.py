@@ -157,10 +157,6 @@ class Blasys(Cmd):
     def help_read_verilog(self):
         print('[Usage] read_verilog INPUT_FILE_PATH\n')
 
-
-
-
-
     def do_read_testbench(self, args):    
         if self.optimizer is None:
             print('[Error] Please first read input Verilog.\n')

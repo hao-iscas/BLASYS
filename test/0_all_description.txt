@@ -1,0 +1,122 @@
+================
+Keep Updating !!
+================
+
+- Author: Hao Hu
+- Date: 2023-12-12
+- Brief Info: 
+    This is a brief description of different circuit benchmarks used in the test/ folder.
+    In general, those benchmarks are somehow classical in VLSI field.
+
+================
+ISCAS'85 benchmarks Summary: (1985 International Symposium on Circuits And Systems)
+
+    ==============================================================================
+    ==================     ISCAS-85 Benchmarks (9 (Partial))
+    ==============================================================================
+    |= Circuit Name =|= Circuit Function =|= Total Gates =|= Inputs =|= Outputs =|
+    
+    |= C432 =|= 27-channel Interrupt Controller =|= 160 =|= 36 =|= 7 =|
+    |= C499 =|= Single-Error-Correcting Circuit =|= 202 =|= 41 =|= 32 =|
+    |= C880 =|= 8-bit ALU =|= 383 =|= 60 =|= 26 =|
+    |= C1908 =|= 16-bit Error Detector/Corrector =|= 880 =|= 33 =|= 25 =|
+    |= C2670 =|= 12-bit ALU and controller =|= 1193 =|= 233 =|= 140 =|
+    |= C3540 =|= 8-bit ALU =|= 1669 =|= 50 =|= 22 =|
+    |= C5315 =|= 9-bit ALU =|= 2406 (2307 from Reference) =|= 178 =|= 123 =|
+    |= C6288 =|= 16*16 Multiplier =|= 2406 =|= 32 =|= 32 =|
+    |= C7552 =|= 32-bit Adder/Comparator =|= 3512 =|= 207 =|= 108 =|
+    ==============================================================================
+
+ISCAS'85 Details:
+
+    - C432: (https://web.eecs.umich.edu/~jhayes/iscas.restore/c432.html)
+        27-channel interrupt controller.
+
+    - C499/C1355: (https://web.eecs.umich.edu/~jhayes/iscas.restore/c499.html)
+        32-Bit Single-Error-Correcting Circuit, The C1355 circuit has the same overall function as c499; it differs in that all XOR primitives of C499 are expanded to their four-NAND-gate equivalents.
+        The 41 inputs are combined to form an 8-bit internal bus S, which then combines with 32 primary inputs to form the 32 primary outputs.
+
+    - C880: (https://web.eecs.umich.edu/~jhayes/iscas.restore/c880.html)
+        8-bit ALU. The core of this 8-bit ALU is an 8-bit 74283-style adder. 
+    
+    - C1908: (https://web.eecs.umich.edu/~jhayes/iscas.restore/c1908/c1908.html)
+        This is a 16-bit single-error-correcting and double-error-detecting (SEC/DED) circuit with some byte-error detection capability.
+
+    - C2670: (https://web.eecs.umich.edu/~jhayes/iscas.restore/c2670/c2670.html)
+        12-Bit ALU with a comparator, an equality checker, and several parity trees.
+
+    - C3540: (https://web.eecs.umich.edu/~jhayes/iscas.restore/c3540/c3540.html)
+        8-bit ALU with binary and BCD arithmetic, and logic and shift operations.
+    
+    - C5315: (https://web.eecs.umich.edu/~jhayes/iscas.restore/c5315/c5315.html)
+        9-bit ALU that performs arithmetic and logic operations simultaneously on two 9-bit input data words, and also computes the parity of the results. 
+
+    - C6288: (https://web.eecs.umich.edu/~jhayes/iscas.restore/c6288.html)
+        16*16 Multiplier, represents a much larger gate-level circuit that also has a concise functional description. 
+
+    - C7552: (https://web.eecs.umich.edu/~jhayes/iscas.restore/c7552/c7552.html)
+        32-bit adder and magnitude comparator with input parity checking
+
+================
+The EPFL Combinational Benchmark Suite Summary: (https://github.com/lsils/benchmarks; https://www.epfl.ch/labs/lsi/page-102566-en-html/benchmarks/) 
+    - firstly introduced in 2015
+    - 23 Combinational circuits to challenge modern logic optimization tools
+    - 10 arithmetic benchmarks, 10 random/control benchmarks, 3 More-than-ten-miliong gates (MtM) Benchmarks
+
+    =======================================================================
+    ===============     Arithmetic Benchmarks (10)
+    =======================================================================
+    |= Circuit Name =|= Total Gates (LUT-6 Count) =|= Inputs =|= Outputs =|
+    
+    |= Adder =|= 254 =|= 256 =|= 129 =|
+    |= Barral Shifter =|= 512 =|= 135 =|= 128 =|
+    |= Divisor =|= 9311 =|= 128 =|= 128 =|
+    |= Hypotenuse =|= 44635 =|= 256 =|= 128 =|
+    |= Log2 =|= 8008 =|= 32 =|= 32 =|
+    |= Max =|= 842 =|= 512 =|= 130 =|
+    |= Multiplier =|= 5913 =|= 128 =|= 128 =|
+    |= Sine =|= 1458 =|= 24 =|= 25 =|
+    |= Square-root =|= 5720 =|= 128 =|= 64 =|
+    |= Square =|= 3985 =|= 64 =|= 128 =|
+    =======================================================================
+
+
+    =======================================================================
+    ===============     Random/Control Benchmarks (10)
+    =======================================================================
+    |= Circuit Name =|= Total Gates (LUT-6 Count) =|= Inputs =|= Outputs =|
+    
+    |= Round-robin arbiter =|= 2722 =|= 256 =|= 129 =|
+    |= Alu control unit =|= 29 =|= 7 =|= 26 =| <-> randon_ctrl.v
+    |= Coding-cavlc =|= 122 =|= 10 =|= 11 =|
+    |= Decoder =|= 287 =|= 8 =|= 256 =|
+    |= i2c controller =|= 365 =|= 147 =|= 142 =|
+    |= int to float converter =|= 49 =|= 11 =|= 7 =|    <*>
+    |= Memory Controller =|= 12096 =|= 1204 =|= 1231 =|
+    |= Priority encoder =|= 210 =|= 128 =|= 8 =|    <*>
+    |= Lookahead XY router =|= 89 =|= 60 =|= 20 =|
+    |= Voter =|= 2691 =|= 1001 =|= 1 =| <*>
+    =======================================================================
+
+    =======================================================================
+    ====        More than ten Miliong gates(MtM) Benchmarks (3)
+    ==== They are extracted from a set of random Boolean functions, 
+    ==== generated with a custom computer program, using as selection 
+    ==== metric the implementation complexity. => Too large, useless for our method
+    =======================================================================
+    |= Circuit Name =|= Total Gates (LUT-6 Count) =|= Inputs =|= Outputs =|
+    
+    |= sixteen =|= 5648909 =|= 117 =|= 50 =|
+    |= twenty =|= 7189658 =|= 137 =|= 60 =|
+    |= twentythree =|= 21085465 =|= 153 =|= 68 =|
+
+
+================
+- Useful Links:
+    1. ISCAS'85 benchmark circuits and netlist format: https://s2.smu.edu/~mitch/class/8389/assgnmt1/bench/iscas85_format.pdf
+    2. ISCAS High-Level Models: https://web.eecs.umich.edu/~jhayes/iscas.restore/benchmark.html
+    3. Benchmarks in Github: https://github.com/santoshsmalagi/Benchmarks/tree/main
+    4. (Reference) Overview of popular benchmark sets, JE Harlow, IEEE Design & Test of Computer 2000
+    5. Another Benchmarks in Github: https://github.com/jpsety/verilog_benchmark_circuits/tree/master
+    6. EPFL Benchmark in Github: https://github.com/lsils/benchmarks
+    7. EPFL Benchmark formal link: https://www.epfl.ch/labs/lsi/page-102566-en-html/benchmarks/

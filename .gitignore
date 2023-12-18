@@ -20,10 +20,12 @@ test/*_tb.v
 test/hypergraph.txt
 test/*_output
 test/*_script
+test/*/*_tb.v
 
 # Hao Hu: 2023-11-8 => scripts and results of circuits
 circuit_outputs/*
 # scripts/*
+log_outputs/*
 
 # Hao Hu: 2023-11-8 => some extensions
 *.history
@@ -31,3 +33,4 @@ circuit_outputs/*
 
 # Hao Hu: 2023-11-16 => the log of outputs
 # log_outputs/*
+*.log

@@ -354,7 +354,6 @@ def approximate(inputfile, k, worker, i, output_name=None):
 
     create_wh(worker.input_list[i], worker.output_list[i], k, W, H, inputfile, output_name, worker.output, worker.path['abc'], formula_file)
 
-
 def number_of_cell(input_file, yosys):
     '''
         Get number of yosys standard cells of input circuit
@@ -455,7 +454,6 @@ def get_delay(sta, script, liberty, input_file, modulename, output_file):
             line = f.readline()
 
     return delay
-
 
 def get_power(sta, script, liberty, input_file, modulename, output_file, delay):
     # print("----- In utils/get_power() -----")
@@ -684,7 +682,11 @@ def module_info(fname, yosys_path):
 
     tmp = time.strftime('%Y_%m_%d-%H_%m_%s') + '.v'
     yosys_command = 'read_verilog ' + fname + '; synth -flatten; opt; opt_clean; write_verilog ' + tmp + ';\n'
+    # with open(time.strftime('%Y_%m_%d-%H_%m_%s') + '.log', 'w') as f:
+        # subprocess.call([yosys_path, '-p', yosys_command], stdout=f, stderr=subprocess.STDOUT)
     subprocess.call([yosys_path, '-p', yosys_command], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+
+    print(yosys_command)
 
     tmp_file = open(tmp)
     inp = {}

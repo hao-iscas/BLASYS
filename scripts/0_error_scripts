@@ -1,0 +1,28 @@
+====
+Date: 2023-12-15
+====
+- ISCAS_85/s_c5315: (Ongoing, impossible to use)
+    - Error reason: Yosys Tool
+    - Detail: 
+        Yosys function "write_aiger -vmap" throws the "std::out_of_range" error
+        The Yosys call is in the "partition" command when trying to transform the cleaned c5315.v into aig format.
+    - Solution tried:
+        - Update the Yosys source code and reinstall => didn't work
+
+- ISCAS_85/s_c7552: (Ongoing, impossible to use)
+    - Error reason: Yosys Tool
+    - Detail: Same as c5315
+    - Solution tried: Same as c5315
+
+- ISCAS_85/s_c432: (Ongoing) => Fixed with the help of Tao 
+    => The reason is the too old writing style of verilog from c432.v from U Michigan.
+    - Error reason: Iverilog Tool
+    - Detail: 
+        Iverilog tool "iverilog -o " to generate the truth table seems wrong.
+        The truth table generated is full of 'z'.
+        It seems like the problem of not correctly used the benchmark file given.
+        The Iverilog call is in the "evaluate_initial()" function when the "blasys" command is run.
+    
+- ISCAS_85/s_c6288: (Ongoing)
+    - Error reason: Same as c432
+
