@@ -23,6 +23,6 @@ Date: 2023-12-15
         It seems like the problem of not correctly used the benchmark file given.
         The Iverilog call is in the "evaluate_initial()" function when the "blasys" command is run.
     
-- ISCAS_85/s_c6288: (Ongoing)
+- ISCAS_85/s_c6288: (Ongoing) => Fixed too, same solution as c432
     - Error reason: Same as c432
 

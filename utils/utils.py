@@ -82,11 +82,12 @@ def synth_design(input_file, output_file, lib_file, script, yosys):
 
     if lib_file is not None:
         yosys_command = 'read_verilog ' + input_file + '; ' + 'synth -flatten; opt; opt_clean -purge;  opt; opt_clean -purge; write_verilog -noattr ' +output_file + '.v; abc -liberty '+lib_file + ' -script ' + script + '; stat -liberty '+lib_file + '; write_verilog -noattr ' +output_file + '_syn.v;\n '
-        # print('Liberty is contained with command: ' + yosys_command)
         area = 0
         #line=subprocess.call(yosys+" -p \'"+ yosys_command+"\' > "+ output_file+".log", shell=True)
         with open(output_file+'.log', 'w') as f:
             line = subprocess.call([yosys, '-p', yosys_command], stdout=f, stderr=subprocess.STDOUT)
+        
+        # time.sleep(5)
         with open(output_file+".log", 'r') as file_handle:
             for line in file_handle:
                 # Combinational loop
@@ -338,14 +339,11 @@ def approximate(inputfile, k, worker, i, output_name=None):
     '''
         Approximate the circuit with BMF technique 
     '''
-    # print(v2w_top('pi', 20))
-    # print(v2w('pi', 20))
-    # time.sleep(10)
-
     modulename = worker.modulenames[i]
     if output_name is None:
         output_name = modulename
 
+    print("before BMF")
     BMF(inputfile+'.truth', k, True)
     W = np.loadtxt(inputfile + '.truth_w_' + str(k), dtype=int)
     H = np.loadtxt(inputfile + '.truth_h_' + str(k), dtype=int)
@@ -353,6 +351,7 @@ def approximate(inputfile, k, worker, i, output_name=None):
     if k == 1:
         W = W.reshape((W.size, 1))
         H = H.reshape((1, H.size))
+    print("After BMF")
 
     create_wh(worker.input_list[i], worker.output_list[i], k, W, H, inputfile, output_name, worker.output, worker.path['abc'], formula_file)
 
@@ -692,8 +691,6 @@ def module_info(fname, yosys_path):
     # with open(time.strftime('%Y_%m_%d-%H_%m_%s') + '.log', 'w') as f:
         # subprocess.call([yosys_path, '-p', yosys_command], stdout=f, stderr=subprocess.STDOUT)
     subprocess.call([yosys_path, '-p', yosys_command], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-
-    print(yosys_command)
 
     tmp_file = open(tmp)
     inp = {}
