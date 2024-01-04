@@ -1,7 +1,7 @@
 output_to circuit_outputs/c499
-read_verilog test/ISCAS_85/c499_behavior.v
-read_testbench test/ISCAS_85/c499_behavior_tb.v
-parallel off
+read_verilog test/ISCAS_85/c499_github.v
+read_testbench test/ISCAS_85/c499_github_tb.v
+parallel on -cpu 5
 metric HD
 read_liberty config/ssxlib013.lib
 sta on

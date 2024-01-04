@@ -1,9 +1,9 @@
 output_to circuit_outputs/c6288
 read_verilog test/ISCAS_85/c6288_github.v
 read_testbench test/ISCAS_85/c6288_github_tb.v
-parallel on -cpu 5
+parallel on -cpu 10
 metric HD
 read_liberty config/ssxlib013.lib
 sta on
-partition 10
+partition 5
 blasys -ts 0.01,0.02 -tr 3

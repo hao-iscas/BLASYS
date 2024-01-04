@@ -1,4 +1,4 @@
-module top ( 
+module cavlc ( 
     \totalcoeffs[0] , \totalcoeffs[1] , \totalcoeffs[2] , \totalcoeffs[3] ,
     \totalcoeffs[4] , \ctable[0] , \ctable[1] , \ctable[2] ,
     \trailingones[0] , \trailingones[1] ,

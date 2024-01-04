@@ -1,7 +1,13 @@
 ====
 Date: 2023-12-15
 ====
+
+- ISCAS_85/s_c2670: (Ongoing, impossible to use)
+    - I/O/Gates: 233/140/1193
+    - Error reason: Yosys Tool, same as c5315
+
 - ISCAS_85/s_c5315: (Ongoing, impossible to use)
+    - I/O/Gates: 178/123/2406
     - Error reason: Yosys Tool
     - Detail: 
         Yosys function "write_aiger -vmap" throws the "std::out_of_range" error
@@ -10,11 +16,27 @@ Date: 2023-12-15
         - Update the Yosys source code and reinstall => didn't work
 
 - ISCAS_85/s_c7552: (Ongoing, impossible to use)
+    - I/O/Gates: 207/108/3512
     - Error reason: Yosys Tool
     - Detail: Same as c5315
     - Solution tried: Same as c5315
 
-- ISCAS_85/s_c432: (Ongoing) => Fixed with the help of Tao 
+====
+Date: 2023-12-18
+====
+
+====================
+Summary in 2023-12-18: 
+====================
+Error Scripts:
+    - Truth Table full of 'z': 
+    - Yosys writing aig function: C2670, C5315, C7552 
+    - Possible reason: output > 100 cause Yosys out_of_range()?
+
+==============================================================
+=========== Fixed!!!!
+==============================================================
+- ISCAS_85/s_c432: (Fixed) with the help of Tao 
     => The reason is the too old writing style of verilog from c432.v from U Michigan.
     - Error reason: Iverilog Tool
     - Detail: 
@@ -25,4 +47,25 @@ Date: 2023-12-15
     
 - ISCAS_85/s_c6288: (Ongoing) => Fixed too, same solution as c432
     - Error reason: Same as c432
+
+- ISCAS_85/s_c1908: (Fixed) => Verilog from github
+    - I/O/Gates: 33/25/880
+    - Error reason: Iverilog Tool
+    - Detail: 
+        Iverilog tool "iverilog -o " to generate the truth table seems wrong.
+        The truth table generated is full of 'z'.
+        It seems like the problem of not correctly used the benchmark file given.
+        The Iverilog call is in the "evaluate_initial()" function when the "blasys" command is run.
+
+- ISCAS_85/s_c3540: (Fixed) => Verilog from github
+    - I/O/Gates: 50/22/1669
+    - Error reason: Iverilog Tool. Same as c1908
+
+
+==============================================================
+=========== Ongoing!!!!
+==============================================================
+
+
+
 

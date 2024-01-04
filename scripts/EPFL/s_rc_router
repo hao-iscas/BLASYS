@@ -1,0 +1,9 @@
+output_to circuit_outputs/router
+read_verilog test/EPFL/randcon_router.v
+read_testbench test/EPFL/randcon_router_tb.v
+parallel on -cpu 10
+metric HD
+read_liberty config/ssxlib013.lib
+sta on
+partition 5
+blasys -ts 0.01,0.02 -tr 3

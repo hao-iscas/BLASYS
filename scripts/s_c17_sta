@@ -1,6 +1,6 @@
-output_to circuit_outputs/c17
-read_verilog test/c17.v
-read_testbench test/c17_tb.v
+output_to circuit_outputs/c17_temp
+read_verilog test/ISCAS_85/c17_github.v
+read_testbench test/ISCAS_85/c17_github_tb.v
 metric HD
 read_liberty config/ssxlib013.lib
 sta on

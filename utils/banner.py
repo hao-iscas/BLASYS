@@ -5,7 +5,7 @@ def print_banner():
     print('/----------------------------------------------------------------------------\\')
     print('|                                                                            |')
     print('|  BLASYS -- Approximate Logic Synthesis Using Boolean Matrix Factorization  |')
-    print('|  Version: {}                                                       |'.format(__version__))
+    print('|  Version: {}                                                          |'.format(__version__))
     print('|                                                                            |')
     print('|  Copyright (C) 2019  SCALE Lab, Brown University                           |')
     print('|                                                                            |')

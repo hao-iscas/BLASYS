@@ -1,7 +1,6 @@
 output_to circuit_outputs/c432
 read_verilog test/ISCAS_85/c432_github.v
 read_testbench test/ISCAS_85/c432_github_tb.v
-parallel on -cpu 5
 metric HD
 read_liberty config/ssxlib013.lib
 sta on

@@ -1,7 +1,7 @@
 output_to circuit_outputs/c5315
 read_verilog test/ISCAS_85/c5315_github.v
 read_testbench test/ISCAS_85/c5315_github_tb.v
-parallel on -cpu 10
+parallel on -cpu 5
 metric HD
 read_liberty config/ssxlib013.lib
 sta on
