@@ -1,4 +1,4 @@
-module top ( 
+module ctrl ( 
     \opcode[0] , \opcode[1] , \opcode[2] , \opcode[3] , \opcode[4] ,
     \op_ext[0] , \op_ext[1] ,
     \sel_reg_dst[0] , \sel_reg_dst[1] , \sel_alu_opB[0] , \sel_alu_opB[1] ,

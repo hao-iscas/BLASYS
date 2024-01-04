@@ -1,4 +1,4 @@
-module top ( 
+module arbiter ( 
     \priority[0] , \priority[1] , \priority[2] , \priority[3] ,
     \priority[4] , \priority[5] , \priority[6] , \priority[7] ,
     \priority[8] , \priority[9] , \priority[10] , \priority[11] ,

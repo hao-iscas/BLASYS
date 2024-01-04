@@ -1,6 +1,9 @@
 import numpy as np
 
 def optimization(err_list, area_list, initial, prev_err, prev_area, threshold):
+    ''' 
+        Selecting the sub-circuit to be replaced with the L_i defined in TCAD22
+    '''
     gradient = np.zeros(len(err_list))
 
     for (idx,(area, err)) in enumerate(zip(area_list, err_list)):
@@ -14,7 +17,6 @@ def optimization(err_list, area_list, initial, prev_err, prev_area, threshold):
     rank1 = np.argsort(area_list, kind='stable')
     rank2 = np.argsort(gradient[rank1], kind='stable')
     rank3 = rank1[rank2]
-
     return rank3
 
 def nearest_neighbor(err_list, area_list, prev_err, prev_area):
@@ -22,6 +24,9 @@ def nearest_neighbor(err_list, area_list, prev_err, prev_area):
     return dist.argmin()
 
 def least_error_opt(err_list, area_list, threshold):
+    '''
+        Selecting the sub-circuit to be replaced with the smallest QoR error.
+    '''
     rank1 = np.argsort(area_list, kind='stable')
     rank2 = np.argsort(err_list[rank1], kind='stable')
     rank3 = rank1[rank2]

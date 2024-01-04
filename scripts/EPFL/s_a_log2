@@ -1,0 +1,9 @@
+output_to circuit_outputs/log2
+read_verilog test/EPFL/arithmetic_log2.v
+read_testbench test/EPFL/arithmetic_log2_tb.v
+parallel on -cpu 10
+metric HD
+read_liberty config/ssxlib013.lib
+sta on
+partition 20
+blasys -ts 0.01,0.02 -tr 3

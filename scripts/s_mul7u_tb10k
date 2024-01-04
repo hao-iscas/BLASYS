@@ -1,0 +1,8 @@
+output_to circuit_outputs/mul7u_tb10k
+read_verilog test/BLASYS_orig/mul7u_01L.v
+read_testbench test/BLASYS_orig/mul7u_01L_c_tb.v
+metric HD
+read_liberty config/ssxlib013.lib
+sta on
+partition 8
+blasys -ts 0.1,0.15 -tr 3

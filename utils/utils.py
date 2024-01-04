@@ -338,10 +338,6 @@ def approximate(inputfile, k, worker, i, output_name=None):
     '''
         Approximate the circuit with BMF technique 
     '''
-    # print(v2w_top('pi', 20))
-    # print(v2w('pi', 20))
-    # time.sleep(10)
-
     modulename = worker.modulenames[i]
     if output_name is None:
         output_name = modulename
