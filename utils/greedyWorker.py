@@ -465,8 +465,8 @@ class GreedyWorker():
             print('Log: Reach error threshold. Exit approximation.')
             return -1
         
-        self.plot(self.error_list, self.area_list)
-        self.store_pareto()
+        # self.plot(self.error_list, self.area_list)
+        # self.store_pareto()
         return 0
 
     def evaluate_iter(self, curr_k_streams, num_iter, step_size, parallel, threshold, least_error, cpu_count, accel):   
@@ -521,6 +521,7 @@ class GreedyWorker():
                     for idx, result in enumerate(results):
                         res = result.get()
                         if res is None:
+                            print('{}_{}-{}-{} returns None!'.format(self.modulename, num_iter, num_track, idx))
                             continue
                         err_list.append(res[0])
                         area_list.append(res[1])
@@ -604,8 +605,6 @@ class GreedyWorker():
 
 
     def plot(self, error_list, area_list):
-
-
         error_np = np.array(error_list) * 100
         area_np = np.array( area_list ) / area_list[0] * 100
         c = np.random.rand(len(error_list))
@@ -644,8 +643,6 @@ class GreedyWorker():
             if pair[1] <= pareto[-1][1]:
                 pareto.append(pair)
                 rank.append(ranking_list[i+1])
-
-
         return pareto, rank
 
 

@@ -6,7 +6,7 @@ Date: 2023-12-15
     - I/O/Gates: 233/140/1193
     - Error reason: Yosys Tool, same as c5315
 
-- ISCAS_85/s_c5315: (Ongoing, impossible to use)
+- ISCAS_85/s_c5315: (Ongoing, impossible to use) 
     - I/O/Gates: 178/123/2406
     - Error reason: Yosys Tool
     - Detail: 
@@ -67,5 +67,12 @@ Error Scripts:
 ==============================================================
 
 
+====
+Date: 2024-1-15
+====
+
+c7552
+c5315
+c2670
 
 

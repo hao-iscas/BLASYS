@@ -1,6 +1,0 @@
-output_to circuit_outputs/c17
-read_verilog test/c17.v
-read_testbench test/c17_tb.v
-metric HD
-sta off
-blasys -ts 0.01,0.02 -tr 3

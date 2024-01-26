@@ -1,9 +1,0 @@
-output_to circuit_outputs/c2670
-read_verilog test/ISCAS_85/c2670_github.v
-read_testbench test/ISCAS_85/c2670_github_tb.v
-parallel off
-metric HD
-read_liberty config/ssxlib013.lib
-sta on
-partition 5
-blasys -ts 0.01,0.02 -tr 3

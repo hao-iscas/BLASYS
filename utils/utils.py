@@ -78,7 +78,11 @@ def evaluate_design(k_stream, worker, filename, display=True):
 def synth_design(input_file, output_file, lib_file, script, yosys):
 
     if lib_file is not None:
-        yosys_command = 'read_verilog ' + input_file + '; ' + 'synth -flatten; abc -script '+ script + '; write_verilog -noattr ' +output_file + '.v; abc -liberty '+lib_file + '; stat -liberty '+lib_file + '; write_verilog -noattr ' +output_file + '_syn.v;\n '
+        # yosys_command = 'read_verilog ' + input_file + '; ' + 'synth -flatten; opt; opt_clean -purge;  opt; opt_clean -purge; write_verilog -noattr '\
+            #  +output_file + '.v; abc -liberty '+lib_file + ' -script ' + script + '; stat -liberty '+lib_file + '; write_verilog -noattr ' +output_file + '_syn.v;\n '
+        # changed in 2024-1-15: abc call the script eariler could reduce the synthesised circuit area
+        yosys_command = 'read_verilog ' + input_file + '; ' + 'synth -flatten; abc -script ' + script + '; write_verilog -noattr '\
+            +output_file + '.v; abc -liberty '+lib_file +'; stat -liberty ' + lib_file + '; write_verilog -noattr ' +output_file + '_syn.v;\n '
         area = 0
         #line=subprocess.call(yosys+" -p \'"+ yosys_command+"\' > "+ output_file+".log", shell=True)
         with open(output_file+'.log', 'w') as f:
@@ -97,7 +101,10 @@ def synth_design(input_file, output_file, lib_file, script, yosys):
                     area = line.split()[-1]
                     break
     else:
-        yosys_command = 'read_verilog ' + input_file + '; ' + 'synth -flatten; opt; opt_clean -purge; opt; opt_clean -purge; write_verilog -noattr ' +output_file + '.v; abc -g NAND -script ' + script + '; write_verilog -noattr ' +output_file + '_syn.v;\n '
+        # changed in 2024-1-15: abc call the script eariler could reduce the synthesised circuit area
+        # yosys_command = 'read_verilog ' + input_file + '; ' + 'synth -flatten; opt; opt_clean -purge; opt; opt_clean -purge; write_verilog -noattr ' +output_file + '.v; abc -g NAND -script ' + script + '; write_verilog -noattr ' +output_file + '_syn.v;\n '
+        yosys_command = 'read_verilog ' + input_file + '; ' + 'synth -flatten; abc -script ' + script + '; write_verilog -noattr ' \
+            +output_file + '.v; abc -g NAND; write_verilog -noattr ' +output_file + '_syn.v;\n '
         # print('Liberty NOT contained with command: ' + yosys_command)
         area = 0
         #line=subprocess.call(yosys+" -p \'"+ yosys_command+"\' > "+ output_file+".log", shell=True)
