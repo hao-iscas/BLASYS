@@ -24,7 +24,7 @@ test/*/*_tb.v
 
 # Hao Hu: 2023-11-8 => scripts and results of circuits
 circuit_outputs/*
-# scripts/*
+scripts/*
 log_outputs/*
 
 # Hao Hu: 2023-11-8 => some extensions

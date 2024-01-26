@@ -485,21 +485,6 @@ class GreedyWorker():
                 - name_list: The list of design names
                 - rank: The rank list of the index of sub-circuits in order of good performance (rank[0] is the index of the best sub-circuit approximated)
         '''
-        '''
-            Inputs:
-                - curr_k_streams: current streams of k (matrix factor) of each sub-circuits to explore
-                - num_iter: number of iteration; step_size: size of step to explore
-                - parallel: parallel mode on/off; cpu_count: number of cpu used
-                - threshold: the list of thresholds to end
-                - least_error: True => select the sub-circuit to be replaced with the smallest QoR error; False => the one with the smallest value of mixed metric of QoR error and area
-                - accel: 0 or 2 => using full mode to explore; 1 => using the fast exploration method (in default 0)
-            Outputs:
-                - result: the stream of k for the the next iteration (the best stream of k of this iteration)
-                - k_lists: 
-                - *_list: The list of * (error, area, delay, power) of all designs in this iteration
-                - name_list: The list of design names
-                - rank: The rank list of the index of sub-circuits in order of good performance (rank[0] is the index of the best sub-circuit approximated)
-        '''
         print("Log: In greedyWorker.evaluate_iter()")
 
         k_lists, err_list, area_list, delay_list, power_list, name_list = [], [], [], [], [], []

@@ -13,9 +13,8 @@ class CombinationalLoop(Exception):
 class NoValidDesign(Exception):
     pass
 
-
 def evaluate_design(k_stream, worker, filename, display=True):
-    print("Log: In utils.evaluate_design()")
+    # print("Log: In utils.evaluate_design()")
     verilog_list = [os.path.join(worker.output, 'partition', worker.modulename + '.v')]
     if display:
         print('Evaluating Design:', k_stream)
@@ -39,8 +38,6 @@ def evaluate_design(k_stream, worker, filename, display=True):
             approximate(directory, approx_degree, worker, i)
         
         verilog_list.append(part_verilog)
-    
-    # print('The verilog file list contains: ', verilog_list)
 
     # Synthesize and estimate chip area
     try:
@@ -81,7 +78,7 @@ def evaluate_design(k_stream, worker, filename, display=True):
 def synth_design(input_file, output_file, lib_file, script, yosys):
 
     if lib_file is not None:
-        yosys_command = 'read_verilog ' + input_file + '; ' + 'synth -flatten; opt; opt_clean -purge;  opt; opt_clean -purge; write_verilog -noattr ' +output_file + '.v; abc -liberty '+lib_file + ' -script ' + script + '; stat -liberty '+lib_file + '; write_verilog -noattr ' +output_file + '_syn.v;\n '
+        yosys_command = 'read_verilog ' + input_file + '; ' + 'synth -flatten; abc -script '+ script + '; write_verilog -noattr ' +output_file + '.v; abc -liberty '+lib_file + '; stat -liberty '+lib_file + '; write_verilog -noattr ' +output_file + '_syn.v;\n '
         area = 0
         #line=subprocess.call(yosys+" -p \'"+ yosys_command+"\' > "+ output_file+".log", shell=True)
         with open(output_file+'.log', 'w') as f:
@@ -384,58 +381,6 @@ def write_aiger(input_file, yosys, output_file, map_file):
     # with open(output_file+'.log', 'w') as f:
         # line = subprocess.call([yosys, '-p', yosys_command], stdout=f, stderr=subprocess.STDOUT)
     subprocess.call([yosys, '-p', yosys_command], stdout=subprocess.DEVNULL)
-
-    # Parse map file and return dict
-    # input_map = {}
-    # output_map = {}
-    # with open(map_file) as f:
-        # line = f.readline()
-        # while line:
-            # tokens = line.split()
-            # if tokens[0] == 'input':
-                # input_map[int(tokens[1])] = tokens[3]
-            # if tokens[0] == 'output':
-                # output_map[int(tokens[1])] = tokens[3]
-
-            # line = f.readline()
-
-    # org_input_map, org_output_map = inpout_map(input_file)
-
-    # return {i: org_input_map[input_map[i]] for i in range(len(input_map))}, \
-            # {i: org_output_map[output_map[i]] for i in range(len(output_map))}
-
-
-# def inpout_map(fname):
-#     input_map = {}
-#     output_map = {}
-#     with open(fname) as file:
-#         line = file.readline()
-#         inp=0
-#         out=0
-#         n_inp = 0
-#         n_out = 0
-#         while line:
-#             line.strip()
-#             tokens=re.split('[ ,;\n]', line)
-#             for t in tokens:
-#                 t.strip()
-#                 if t != "":
-#                     if inp == 1 and t != 'output':
-#                         input_map[t.strip('\\')] = n_inp
-#                         n_inp += 1
-#                     if out == 1 and t != 'wire' and t != 'assign':
-#                         output_map[t.strip('\\')] = n_out
-#                         n_out += 1
-#                     if t == 'input':
-#                         inp=1
-#                     elif t == 'output':
-#                         out=1
-#                         inp=0
-#                     elif t == 'wire' or t == 'assign':
-#                         out=0
-#             line=file.readline()
-# 
-#     return input_map, output_map
 
 def get_delay(sta, script, liberty, input_file, modulename, output_file):
     # print("----- In utils/get_delay() -----")
