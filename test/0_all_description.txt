@@ -42,17 +42,18 @@ ISCAS'85 Details:
     - C1908: (https://web.eecs.umich.edu/~jhayes/iscas.restore/c1908/c1908.html)
         This is a 16-bit single-error-correcting and double-error-detecting (SEC/DED) circuit with some byte-error detection capability.
 
-    - C2670: (https://web.eecs.umich.edu/~jhayes/iscas.restore/c2670/c2670.html)
-        12-Bit ALU with a comparator, an equality checker, and several parity trees.
-
     - C3540: (https://web.eecs.umich.edu/~jhayes/iscas.restore/c3540/c3540.html)
         8-bit ALU with binary and BCD arithmetic, and logic and shift operations.
     
-    - C5315: (https://web.eecs.umich.edu/~jhayes/iscas.restore/c5315/c5315.html)
-        9-bit ALU that performs arithmetic and logic operations simultaneously on two 9-bit input data words, and also computes the parity of the results. 
-
     - C6288: (https://web.eecs.umich.edu/~jhayes/iscas.restore/c6288.html)
         16*16 Multiplier, represents a much larger gate-level circuit that also has a concise functional description. 
+
+    -----------------------------------------------------------------------------------
+     - C2670: (https://web.eecs.umich.edu/~jhayes/iscas.restore/c2670/c2670.html)
+        12-Bit ALU with a comparator, an equality checker, and several parity trees.
+
+    - C5315: (https://web.eecs.umich.edu/~jhayes/iscas.restore/c5315/c5315.html)
+        9-bit ALU that performs arithmetic and logic operations simultaneously on two 9-bit input data words, and also computes the parity of the results. 
 
     - C7552: (https://web.eecs.umich.edu/~jhayes/iscas.restore/c7552/c7552.html)
         32-bit adder and magnitude comparator with input parity checking

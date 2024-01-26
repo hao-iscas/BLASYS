@@ -465,26 +465,11 @@ class GreedyWorker():
             print('Log: Reach error threshold. Exit approximation.')
             return -1
         
-        self.plot(self.error_list, self.area_list)
-        self.store_pareto()
+        # self.plot(self.error_list, self.area_list)
+        # self.store_pareto()
         return 0
 
     def evaluate_iter(self, curr_k_streams, num_iter, step_size, parallel, threshold, least_error, cpu_count, accel):   
-        '''
-            Inputs:
-                - curr_k_streams: current streams of k (matrix factor) of each sub-circuits to explore
-                - num_iter: number of iteration; step_size: size of step to explore
-                - parallel: parallel mode on/off; cpu_count: number of cpu used
-                - threshold: the list of thresholds to end
-                - least_error: True => select the sub-circuit to be replaced with the smallest QoR error; False => the one with the smallest value of mixed metric of QoR error and area
-                - accel: 0 or 2 => using full mode to explore; 1 => using the fast exploration method (in default 0)
-            Outputs:
-                - result: the stream of k for the the next iteration (the best stream of k of this iteration)
-                - k_lists: 
-                - *_list: The list of * (error, area, delay, power) of all designs in this iteration
-                - name_list: The list of design names
-                - rank: The rank list of the index of sub-circuits in order of good performance (rank[0] is the index of the best sub-circuit approximated)
-        '''
         '''
             Inputs:
                 - curr_k_streams: current streams of k (matrix factor) of each sub-circuits to explore
@@ -536,6 +521,7 @@ class GreedyWorker():
                     for idx, result in enumerate(results):
                         res = result.get()
                         if res is None:
+                            print('{}_{}-{}-{} returns None!'.format(self.modulename, num_iter, num_track, idx))
                             continue
                         err_list.append(res[0])
                         area_list.append(res[1])
@@ -619,8 +605,6 @@ class GreedyWorker():
 
 
     def plot(self, error_list, area_list):
-
-
         error_np = np.array(error_list) * 100
         area_np = np.array( area_list ) / area_list[0] * 100
         c = np.random.rand(len(error_list))
@@ -659,8 +643,6 @@ class GreedyWorker():
             if pair[1] <= pareto[-1][1]:
                 pareto.append(pair)
                 rank.append(ranking_list[i+1])
-
-
         return pareto, rank
 
 
